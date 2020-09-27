@@ -1,0 +1,12 @@
+@import "~antd/dist/antd.css";
+@import "~reset-css/sass/reset.scss";
+
+html,
+body,
+#root,
+.App,
+.wrapper {
+  height: 100%;
+  color: #202020;
+  font-size: 14px;
+}
