@@ -3,5 +3,12 @@
   background: #fff;
   box-shadow: 0 0 25px rgba(0, 0, 0, 0.04204);
   border-radius: 3px;
-  width: 430px;
+  width: 100%;
+  transition: width 1s;
+}
+
+@media screen and (min-width: 440px) {
+  .shadowedbox {
+    width: 430px;
+  }
 }

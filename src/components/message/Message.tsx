@@ -1,20 +1,17 @@
 import React, { FunctionComponent } from "react";
-import distanceInWordsToNow from "date-fns/formatDistanceToNow";
-import ruLocal from "date-fns/locale/ru/index";
 import classNames from "classnames";
 import "./Message.scss";
-
-import readSvg from "../../assets/img/readed.svg";
-import noReadSvg from "../../assets/img/noreaded.svg";
+import { Time, MessageStatus } from "../index";
 
 type Props = {
   avatar: string;
-  text: string;
-  date: Date;
+  text?: string;
+  date?: Date;
   user?: any;
-  isMe: boolean;
+  isMe?: boolean;
   isReaded?: boolean;
   attachments?: any;
+  isTyping?: boolean;
 };
 
 const Message: FunctionComponent<Props> = ({
@@ -25,32 +22,34 @@ const Message: FunctionComponent<Props> = ({
   isMe,
   isReaded,
   attachments,
+  isTyping,
 }) => {
-  const classes = classNames("message", { "message--me": isMe });
+  const classes = classNames("message", {
+    "message--me": isMe,
+    "message--typing": isTyping,
+    "message--image": attachments && attachments.length === 1,
+  });
+
   return (
     <div className={classes}>
       <div className="message__avatar">
         <img src={avatar} alt={`Avatar ${user?.fullname}`} />
       </div>
       <div className="message__content">
-        {isMe && isReaded && (
-          <img
-            className="message__icon-readed"
-            src={readSvg}
-            alt="Readed icon"
-          />
-        )}
-        {isMe && !isReaded && (
-          <img
-            className="message__icon-noreaded"
-            src={noReadSvg}
-            alt="No readed icon"
-          />
-        )}
+        <MessageStatus isMe={isMe} isReaded={isReaded} />
         <div className="message__info">
-          <div className="message__bubble">
-            <p className="message__text">{text}</p>
-          </div>
+          {(text || isTyping) && (
+            <div className="message__bubble">
+              {text && <p className="message__text">{text}</p>}
+              {isTyping && (
+                <div className="message__typing">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+              )}
+            </div>
+          )}
           <div className="message__attachments">
             {attachments &&
               attachments.map((item: any) => {
@@ -61,9 +60,11 @@ const Message: FunctionComponent<Props> = ({
                 );
               })}
           </div>
-          <p className="message__date">
-            {distanceInWordsToNow(date, { addSuffix: true, locale: ruLocal })}
-          </p>
+          {date && (
+            <p className="message__date">
+              <Time date={date} />
+            </p>
+          )}
         </div>
       </div>
     </div>

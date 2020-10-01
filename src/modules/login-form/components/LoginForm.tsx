@@ -2,13 +2,20 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Form, Input, Button } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
-
+import { FormikProps } from "formik";
+import { loginForm } from "../../../types/interfaces";
 import { ShadowedBox } from "../../../components/index";
+import { validateField } from "../../../util/helpers";
 
-const LoginForm = () => {
-  const onFinish = (values: any) => {
-    console.log("Received values of form: ", values);
-  };
+const LoginForm = (props: FormikProps<loginForm>) => {
+  const {
+    values,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    touched,
+    errors,
+  } = props;
 
   return (
     <>
@@ -18,30 +25,39 @@ const LoginForm = () => {
       </div>
       <ShadowedBox>
         <Form
-          name="normal_login"
           className="login-form"
-          initialValues={{ remember: true }}
-          onFinish={onFinish}
+          initialValues={{ email: values.email, password: values.password }}
+          onFinish={handleSubmit}
         >
           <Form.Item
-            name="username"
-            rules={[{ required: true, message: "Please input your Username!" }]}
+            name="email"
+            validateStatus={validateField("email", touched, errors)}
+            hasFeedback
+            help={!touched.email ? null : errors.email}
           >
             <Input
               prefix={<UserOutlined className="site-form-item-icon" />}
               placeholder="Username"
               size="large"
+              value={values.email}
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
           </Form.Item>
           <Form.Item
             name="password"
-            rules={[{ required: true, message: "Please input your Password!" }]}
+            validateStatus={validateField("password", touched, errors)}
+            hasFeedback
+            help={!touched.password ? null : errors.password}
           >
             <Input
               prefix={<LockOutlined className="site-form-item-icon" />}
               type="password"
               placeholder="Password"
               size="large"
+              value={values.password}
+              onChange={handleChange}
+              onBlur={handleBlur}
             />
           </Form.Item>
 

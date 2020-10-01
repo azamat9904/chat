@@ -1,6 +1,9 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { Form, Input, Button } from "antd";
+import { FormikProps } from "formik";
+import { validateField } from "../../../util/helpers/index";
+
 import {
   MailOutlined,
   UserOutlined,
@@ -8,15 +11,23 @@ import {
   InfoCircleTwoTone,
 } from "@ant-design/icons";
 
+import { registerForm } from "../../../types/interfaces";
 import { ShadowedBox } from "../../../components/index";
 
-const RegisterForm = () => {
-  const onFinish = (values: any) => {
-    console.log("Received values of form: ", values);
-  };
+const RegisterForm = (props: FormikProps<registerForm>) => {
+  const {
+    touched,
+    errors,
+    isSubmitting,
+    values,
+    handleSubmit,
+    handleChange,
+    handleBlur,
+    isValid,
+    dirty,
+  } = props;
 
   const success = true;
-
   return (
     <>
       <div className="top">
@@ -29,66 +40,78 @@ const RegisterForm = () => {
         {success ? (
           <Fragment>
             <Form
-              name="normal_login"
               className="login-form"
-              initialValues={{ remember: true }}
-              onFinish={onFinish}
+              initialValues={{
+                email: "",
+                password: "",
+                name: "",
+                repeatPassword: "",
+              }}
+              onFinish={handleSubmit}
             >
               <Form.Item
                 name="email"
-                rules={[
-                  { required: true, message: "Please input your Email!" },
-                ]}
+                validateStatus={validateField("email", touched, errors)}
+                hasFeedback
+                help={!touched.email ? null : errors.email}
               >
                 <Input
                   prefix={<MailOutlined className="site-form-item-icon" />}
                   placeholder="Email"
                   size="large"
+                  value={values.email}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                 />
               </Form.Item>
 
-              <Form.Item
-                name="name"
-                rules={[{ required: true, message: "Please input your Name!" }]}
-              >
+              <Form.Item name="name">
                 <Input
                   prefix={<UserOutlined className="site-form-item-icon" />}
                   type="text"
                   placeholder="Ваше имя"
                   size="large"
+                  value={values.name}
+                  onChange={handleChange}
                 />
               </Form.Item>
 
               <Form.Item
                 name="password"
-                rules={[
-                  { required: true, message: "Please input your Password!" },
-                ]}
+                validateStatus={validateField("password", touched, errors)}
+                help={!touched.password ? null : errors.password}
               >
-                <Input
+                <Input.Password
                   prefix={<LockOutlined className="site-form-item-icon" />}
                   type="password"
                   placeholder="Пароль"
                   size="large"
+                  value={values.password}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  allowClear
                 />
               </Form.Item>
 
-              <Form.Item
-                name="repeat-password"
-                rules={[
-                  { required: true, message: "Please input your Password!" },
-                ]}
-              >
+              <Form.Item name="repeatPassword">
                 <Input
                   prefix={<LockOutlined className="site-form-item-icon" />}
                   type="password"
                   placeholder="Повторите Пароль"
                   size="large"
+                  value={values.repeatPassword}
+                  onChange={handleChange}
                 />
               </Form.Item>
 
               <Form.Item>
-                <Button type="primary" className="button" htmlType="submit">
+                <Button
+                  type="primary"
+                  className="button"
+                  htmlType="submit"
+                  disabled={!isValid || !dirty}
+                  loading={isSubmitting}
+                >
                   Зарегистрироваться
                 </Button>
               </Form.Item>
