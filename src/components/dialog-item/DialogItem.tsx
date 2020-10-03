@@ -1,23 +1,28 @@
 import React, { FunctionComponent } from "react";
-import { Time, MessageStatus } from "../index";
+import { MessageStatus } from "../index";
 import "./DialogItem.scss";
 import classNames from "classnames";
-import { userDialog } from "../../types/interfaces";
+import { dialog } from "../../types/interfaces";
+import { format } from "date-fns";
+import isToday from "date-fns/isToday";
 
-type Props = {
-  user: userDialog;
-  message?: string;
-  unreaded?: number;
+const getMessageTime = (created_at: string) => {
+  const date = new Date(created_at);
+  if (isToday(date)) {
+    return format(date, "k:m");
+  }
+  return format(date, "dd.MM.yy");
 };
 
 const getAvatar = (avatar?: string, fullname?: string) => {
   if (avatar) return <img src={avatar} alt={`${fullname} avatar`} />;
 };
 
-const DialogItem: FunctionComponent<Props> = ({ user, message, unreaded }) => {
+const DialogItem: FunctionComponent<dialog> = ({ user, message }) => {
   const classes = classNames("dialogs__item", {
     "dialogs__item--online": user?.online,
   });
+
   return (
     <div className={classes}>
       <div className="dialogs__item-avatar">
@@ -26,15 +31,14 @@ const DialogItem: FunctionComponent<Props> = ({ user, message, unreaded }) => {
       <div className="dialogs__item-info">
         <div className="dialogs__item-info-top">
           <b>{user.fullname}</b>
-          {/* <Time date={new Date()} /> */}
-          <span>13:03</span>
+          <span>{getMessageTime(message.created_at)}</span>
         </div>
         <div className="dialogs__item-info-bottom">
-          <p>{message}</p>
-          <MessageStatus isMe={user?.isMe} isReaded={user?.isReaded} />
-          {unreaded && unreaded > 0 && (
+          <p>{message?.text}</p>
+          <MessageStatus isMe={user?.isMe} isReaded={message?.isReaded} />
+          {message?.unreaded && message?.unreaded > 0 && (
             <div className="dialogs__item-info-bottom-count">
-              {unreaded > 9 ? "+9" : unreaded}
+              {message?.unreaded > 9 ? "+9" : message?.unreaded}
             </div>
           )}
         </div>

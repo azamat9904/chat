@@ -70,6 +70,66 @@
     word-break: break-all;
   }
 
+  &--audio {
+    audio {
+      display: none;
+    }
+
+    #{$self}__bubble {
+      width: 250px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #{$self}__audio {
+      &-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        z-index: 10;
+      }
+      &-btn {
+        button {
+          width: 28px;
+          height: 28px;
+          border-radius: 30px;
+          background-color: #0f3997;
+          border: 0;
+          text-align: center;
+          padding: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+
+          img {
+            width: 13px;
+            height: 13px;
+            position: relative;
+            right: -0.6px;
+          }
+        }
+      }
+
+      &-duration {
+        color: #fff;
+        font-weight: 500;
+        opacity: 0.5;
+        font-size: 12px;
+      }
+      &-progress {
+        background-color: #418fff;
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        z-index: 1;
+        transition: 0.3s ease-in-out;
+      }
+    }
+  }
+
   &--me {
     display: flex;
     flex-direction: row-reverse;

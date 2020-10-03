@@ -32,5 +32,16 @@ export interface userDialog {
   online?: boolean;
   avatar?: string;
   isMe?: boolean;
+}
+
+export interface message {
+  text: string;
   isReaded?: boolean;
+  unreaded?: number;
+  created_at: string;
+}
+
+export interface dialog {
+  user: userDialog;
+  message: message;
 }

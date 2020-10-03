@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import classNames from "classnames";
 import "./Message.scss";
-import { Time, MessageStatus } from "../index";
+import { Time, MessageStatus, MessageAudio } from "../index";
 
 type Props = {
   avatar: string;
@@ -12,6 +12,7 @@ type Props = {
   isReaded?: boolean;
   attachments?: any;
   isTyping?: boolean;
+  audio?: string;
 };
 
 const Message: FunctionComponent<Props> = ({
@@ -23,11 +24,13 @@ const Message: FunctionComponent<Props> = ({
   isReaded,
   attachments,
   isTyping,
+  audio,
 }) => {
   const classes = classNames("message", {
     "message--me": isMe,
     "message--typing": isTyping,
     "message--image": attachments && attachments.length === 1,
+    "message--audio": audio,
   });
 
   return (
@@ -38,7 +41,7 @@ const Message: FunctionComponent<Props> = ({
       <div className="message__content">
         <MessageStatus isMe={isMe} isReaded={isReaded} />
         <div className="message__info">
-          {(text || isTyping) && (
+          {(text || isTyping || audio) && (
             <div className="message__bubble">
               {text && <p className="message__text">{text}</p>}
               {isTyping && (
@@ -48,18 +51,20 @@ const Message: FunctionComponent<Props> = ({
                   <span />
                 </div>
               )}
+              {audio && <MessageAudio audio={audio} />}
             </div>
           )}
-          <div className="message__attachments">
-            {attachments &&
-              attachments.map((item: any) => {
+          {attachments && (
+            <div className="message__attachments">
+              {attachments.map((item: any, index: number) => {
                 return (
-                  <div className="message__attachments-item">
+                  <div className="message__attachments-item" key={index}>
                     <img src={item.url} alt={item.filename} />
                   </div>
                 );
               })}
-          </div>
+            </div>
+          )}
           {date && (
             <p className="message__date">
               <Time date={date} />
