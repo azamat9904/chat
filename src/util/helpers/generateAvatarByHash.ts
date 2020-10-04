@@ -7,7 +7,7 @@ export default (hash: string) => {
     .map((char) => (char.charCodeAt(0) > 255 ? 255 : char.charCodeAt(0)));
 
   return {
-    color: tinycolor({ r, g, b }).toHexString(),
-    colorLighten: tinycolor({ r, g, b }).lighten().toHexString(),
+    color: tinycolor({ r, g, b }).saturate().toHexString(),
+    colorLighten: tinycolor({ r, g, b }).saturate().lighten().toHexString(),
   };
 };

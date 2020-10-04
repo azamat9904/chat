@@ -31,7 +31,7 @@ export interface userDialog {
   _id: string;
   fullname: string;
   online?: boolean;
-  avatar?: string;
+  avatar?: string | null;
   isMe?: boolean;
 }
 

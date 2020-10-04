@@ -1,8 +1,26 @@
 @import "~antd/dist/antd.css";
 @import "~reset-css/sass/reset.scss";
+@import "./layouts/chat";
 
 * {
+  scrollbar-width: thin;
   outline: none;
+}
+
+/* Works on Chrome/Edge/Safari */
+*::-webkit-scrollbar {
+  width: 6px;
+}
+*::-webkit-scrollbar-track {
+  background: #fff;
+}
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(238, 238, 238);
+  border-radius: 20px;
+}
+
+body {
+  background-color: #f4f7fd;
 }
 
 html,

@@ -1,0 +1,54 @@
+.chat-input {
+  margin: 20px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+
+  .ant-input {
+    padding: 6.5px 11px 6.5px 40px;
+    margin-right: 10px;
+  }
+
+  .ant-btn {
+    border-radius: 30px;
+  }
+
+  &__smile-btn {
+    position: absolute;
+    z-index: 1;
+  }
+
+  &__actions {
+    flex: 0 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: rgba(0, 0, 0, 0.575);
+    svg {
+      cursor: pointer;
+      transition: 0.3s;
+
+      &:hover {
+        color: rgba(0, 0, 0, 0.856);
+      }
+    }
+  }
+
+  &__smile-btn {
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    background-color: #fff;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.575);
+    transition: 0.2s;
+
+    &:hover {
+      color: rgba(0, 0, 0, 0.856);
+    }
+  }
+
+  svg {
+    font-size: 18px;
+  }
+}

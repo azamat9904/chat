@@ -7,3 +7,5 @@ export { default as MessageStatus } from "./message-status/MessageStatus";
 export { default as Dialogs } from "./dialogs/Dialogs";
 export { default as MessageAudio } from "./message-audio/MessageAudio";
 export { default as Avatar } from "./avatar/Avatar";
+export { default as Status } from "./status/Status";
+export { default as ChatInput } from "./chat-input/ChatInput";

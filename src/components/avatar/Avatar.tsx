@@ -1,13 +1,10 @@
 import React, { FunctionComponent } from "react";
+import { userDialog } from "../../types/interfaces";
 import { generateAvatar } from "../../util/helpers/index";
 import "./Avatar.scss";
 
 type Props = {
-  user: {
-    avatar?: string;
-    fullname: string;
-    _id: string;
-  };
+  user: userDialog;
 };
 
 const Avatar: FunctionComponent<Props> = ({
