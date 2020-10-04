@@ -8,18 +8,6 @@ const Home = () => {
   return (
     <section className="home">
       <Dialogs items={items} />
-      {/* <Dialogs items = [{
-        user:{
-          fullname:'Федор Достаевский',
-          avatar:null
-        },
-        message: {
-          text:'Мы все привуетствуем вам глубочайшее наше почтение и целуем ваши руки,дражайший папенька',
-        isReaded:false,
-        updated_at:new Date()
-        }
-      }
-    ]/> */}
 
       <Message
         avatar="https://www.mlive.com/resizer/WHw98KiEZAbpKg2rrlK1fiDBm98=/450x0/smart/cloudfront-us-east-1.images.arcpublishing.com/advancelocal/ETSJBFFEBNBCDG6BVGJWPZMVPI.jpg"
@@ -43,7 +31,7 @@ const Home = () => {
       />
       <Message
         avatar="https://www.mlive.com/resizer/WHw98KiEZAbpKg2rrlK1fiDBm98=/450x0/smart/cloudfront-us-east-1.images.arcpublishing.com/advancelocal/ETSJBFFEBNBCDG6BVGJWPZMVPI.jpg"
-        audio="https://cdn1.sefon.pro/files/prev/2/%D0%95%D0%B3%D0%BE%D1%80%20%D0%9A%D1%80%D0%B8%D0%B4%20%26%20MOLLY%20-%20%D0%95%D1%81%D0%BB%D0%B8%20%D0%A2%D1%8B%20%D0%9C%D0%B5%D0%BD%D1%8F%20%D0%9D%D0%B5%20%D0%9B%D1%8E%D0%B1%D0%B8%D1%88%D1%8C%20%28192kbps%29.mp3"
+        audio="https://s1.muzter.net/files/mp3/tones_and_i_-_dance_monkey_muzter.net_128.mp3"
         date={new Date()}
       />
       {/* <Message

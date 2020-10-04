@@ -28,6 +28,7 @@ export interface obj {
 }
 
 export interface userDialog {
+  _id: string;
   fullname: string;
   online?: boolean;
   avatar?: string;

@@ -1,5 +1,5 @@
 import React, { FunctionComponent } from "react";
-import { MessageStatus } from "../index";
+import { MessageStatus, Avatar } from "../index";
 import "./DialogItem.scss";
 import classNames from "classnames";
 import { dialog } from "../../types/interfaces";
@@ -14,9 +14,10 @@ const getMessageTime = (created_at: string) => {
   return format(date, "dd.MM.yy");
 };
 
-const getAvatar = (avatar?: string, fullname?: string) => {
-  if (avatar) return <img src={avatar} alt={`${fullname} avatar`} />;
-};
+// const getAvatar = (avatar?: string, fullname?: string) => {
+//   if (avatar) return <img src={avatar} alt={`${fullname} avatar`} />;
+//   console.log(generateAvatar("94031b5971338414a61aba503ac951ca"));
+// };
 
 const DialogItem: FunctionComponent<dialog> = ({ user, message }) => {
   const classes = classNames("dialogs__item", {
@@ -26,7 +27,7 @@ const DialogItem: FunctionComponent<dialog> = ({ user, message }) => {
   return (
     <div className={classes}>
       <div className="dialogs__item-avatar">
-        {getAvatar(user?.avatar, user.fullname)}
+        <Avatar user={user} />
       </div>
       <div className="dialogs__item-info">
         <div className="dialogs__item-info-top">

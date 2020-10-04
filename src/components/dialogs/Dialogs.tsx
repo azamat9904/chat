@@ -13,9 +13,6 @@ const Dialogs: FunctionComponent<Props> = ({ items }) => {
       {orderBy(items, ["created_at", "desc"]).map((item, index) => (
         <DialogItem key={index} user={item.user} message={item.message} />
       ))}
-      {/* {items.map((item, index) => (
-        <DialogItem key={index} user={item.user} message={item.message} />
-      ))} */}
     </div>
   );
 };
