@@ -17,6 +17,7 @@ export const items: message[] = [
       avatar: null,
       isMe: false,
     },
+    dialog: "4id505f7b29c619f35e78e963795f",
   },
   {
     _id: "845f7b29c6d7d41afe3fcd5e23",
@@ -34,6 +35,7 @@ export const items: message[] = [
       avatar: null,
       isMe: true,
     },
+    dialog: "4id505f7b29c619f35e78e963795f",
   },
   {
     _id: "365f7b29c616e6f9b2931401b7",
@@ -52,6 +54,7 @@ export const items: message[] = [
       avatar: null,
       isMe: false,
     },
+    dialog: "4id505f7b29c619f35e78e963795f",
   },
   {
     _id: "025f7b29c68c2ccf9317267a67",
@@ -70,6 +73,7 @@ export const items: message[] = [
       avatar: null,
       isMe: false,
     },
+    dialog: "4id505f7b29c619f35e78e963795f",
   },
   {
     _id: "965f7b29c636fb57baa8b2d141",
@@ -87,6 +91,7 @@ export const items: message[] = [
       avatar: null,
       isMe: true,
     },
+    dialog: "4id505f7b29c619f35e78e963795f",
   },
   {
     _id: "465f7b29c6f8e777fca3022943",
@@ -104,6 +109,7 @@ export const items: message[] = [
       avatar: null,
       isMe: false,
     },
+    dialog: "4id505f7b29c619f35e78e963795f",
   },
   {
     _id: "335f7b29c6b8678159218c6e68",
@@ -121,6 +127,7 @@ export const items: message[] = [
       avatar: null,
       isMe: false,
     },
+    dialog: "4id505f7b29c619f35e78e963795f",
   },
   {
     _id: "165f7b29c6520cdc83437503b3",
@@ -138,6 +145,7 @@ export const items: message[] = [
       avatar: null,
       isMe: false,
     },
+    dialog: "4id505f7b29c619f35e78e963795f",
   },
   {
     _id: "405f7b29c6c1abdb4ab1e8c67b",
@@ -156,6 +164,7 @@ export const items: message[] = [
       avatar: null,
       isMe: true,
     },
+    dialog: "4id505f7b29c619f35e78e963795f",
   },
 ];
 
@@ -177,6 +186,7 @@ export const messages: message[] = [
         "https://4.bp.blogspot.com/-txKoWDBmvzY/XHAcBmIiZxI/AAAAAAAAC5o/wOkD9xoHn28Dl0EEslKhuI-OzP8_xvTUwCLcBGAs/s1600/2.jpg",
       isMe: false,
     },
+    dialog: "4id505f7b29c619f35e78e963795f",
   },
   {
     _id: "845f7b29c6d7d41afe3fcd5e23",
@@ -195,6 +205,7 @@ export const messages: message[] = [
         "https://4.bp.blogspot.com/-txKoWDBmvzY/XHAcBmIiZxI/AAAAAAAAC5o/wOkD9xoHn28Dl0EEslKhuI-OzP8_xvTUwCLcBGAs/s1600/2.jpg",
       isMe: true,
     },
+    dialog: "4id505f7b29c619f35e78e963795f",
   },
   {
     _id: "365f7b29c616e6f9b2931401b7",
@@ -214,6 +225,7 @@ export const messages: message[] = [
         "https://4.bp.blogspot.com/-txKoWDBmvzY/XHAcBmIiZxI/AAAAAAAAC5o/wOkD9xoHn28Dl0EEslKhuI-OzP8_xvTUwCLcBGAs/s1600/2.jpg",
       isMe: false,
     },
+    dialog: "4id505f7b29c619f35e78e963795f",
   },
   {
     _id: "025f7b29c68c2ccf9317267a67",
@@ -232,6 +244,7 @@ export const messages: message[] = [
       avatar: null,
       isMe: false,
     },
+    dialog: "4id505f7b29c619f35e78e963795f",
   },
   {
     _id: "965f7b29c636fb57baa8b2d141",
@@ -249,6 +262,7 @@ export const messages: message[] = [
       avatar: null,
       isMe: true,
     },
+    dialog: "4id505f7b29c619f35e78e963795f",
   },
   {
     _id: "465f7b29c6f8e777fca3022943",
@@ -266,6 +280,7 @@ export const messages: message[] = [
       avatar: null,
       isMe: false,
     },
+    dialog: "4id505f7b29c619f35e78e963795f",
   },
   {
     _id: "335f7b29c6b8678159218c6e68",
@@ -283,6 +298,7 @@ export const messages: message[] = [
       avatar: null,
       isMe: false,
     },
+    dialog: "4id505f7b29c619f35e78e963795f",
   },
   {
     _id: "165f7b29c6520cdc83437503b3",
@@ -300,23 +316,25 @@ export const messages: message[] = [
       avatar: null,
       isMe: false,
     },
+    dialog: "4id505f7b29c619f35e78e963795f",
   },
   {
     _id: "405f7b29c6c1abdb4ab1e8c67b",
-    text:
-      "Pariatur est officia ex cillum Lorem nisi excepteur commodo enim laborum exercitation ullamco exercitation.",
+    text: null,
     date: "Fri Oct 01 1999 01:05:08 GMT+0700 (GMT+06:00)",
     isReaded: false,
     attachments: null,
     isTyping: false,
-    audio: null,
-    unreaded: null,
+    audio:
+      "https://s1.muzter.net/files/mp3/tones_and_i_-_dance_monkey_muzter.net_128.mp3",
+    unreaded: 0,
     user: {
       _id: "025f7b29c668bdd6c40362b345",
       fullname: "Doyle Ochoa",
       isOnline: true,
       avatar: null,
-      isMe: true,
+      isMe: false,
     },
+    dialog: "4id505f7b29c619f35e78e963795f",
   },
 ];

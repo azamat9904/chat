@@ -41,4 +41,5 @@ export interface message {
   audio: string | null;
   unreaded: number | null;
   user: userDialog;
+  dialog: string;
 }

@@ -24,12 +24,13 @@
 
   &__avatar {
     flex: 0 0 35px;
+    align-self: flex-end;
     display: flex;
     align-items: flex-end;
     width: 35px;
     height: 35px;
     margin-right: 13px;
-    margin-bottom: 22px;
+    margin-bottom: 18px;
 
     img {
       border-radius: 50px;
@@ -139,10 +140,8 @@
     margin-left: auto;
 
     #{$self}__avatar {
-      img {
-        margin-right: 0;
-        margin-left: 13px;
-      }
+      margin-right: 0;
+      margin-left: 13px;
     }
 
     #{$self}__bubble {
