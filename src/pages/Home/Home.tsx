@@ -1,8 +1,8 @@
 import React from "react";
 import "./Home.scss";
 import * as Icon from "@ant-design/icons";
-import { Input } from "antd";
-import { Message, Dialogs, Status, ChatInput } from "../../components/index";
+import { Message, Status, ChatInput } from "../../components/index";
+import { Dialogs } from "../../containers";
 import { items } from "../../data/mock";
 
 const Home = () => {
@@ -16,12 +16,6 @@ const Home = () => {
               <span>Список диалогов</span>
             </div>
             <Icon.FormOutlined />
-          </div>
-          <div className="chat__sidebar-search">
-            <Input.Search
-              placeholder="Поиск среди контактов"
-              onSearch={(value) => console.log(value)}
-            />
           </div>
           <div className="chat__sidebar-dialogs">
             <Dialogs items={items} />

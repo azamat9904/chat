@@ -9,3 +9,4 @@ export { default as MessageAudio } from "./message-audio/MessageAudio";
 export { default as Avatar } from "./avatar/Avatar";
 export { default as Status } from "./status/Status";
 export { default as ChatInput } from "./chat-input/ChatInput";
+export { default as Search } from "./search/Search";

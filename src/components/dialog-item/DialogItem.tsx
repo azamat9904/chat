@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import { MessageStatus, Avatar } from "../index";
 import "./DialogItem.scss";
 import classNames from "classnames";
-import { dialog, userDialog, message } from "../../types/interfaces";
+import { userDialog, message } from "../../types/interfaces";
 import { format } from "date-fns";
 import isToday from "date-fns/isToday";
 
@@ -15,9 +15,9 @@ const getMessageTime = (created_at: string) => {
 };
 
 type Props = {
-  user: userDialog,
-  message:message
-}
+  user: userDialog;
+  message: message;
+};
 const DialogItem: FunctionComponent<Props> = ({ user, message }) => {
   const classes = classNames("dialogs__item", {
     "dialogs__item--online": user?.online,
