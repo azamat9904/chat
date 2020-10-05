@@ -1,62 +1,46 @@
 import React, { FunctionComponent } from "react";
 import classNames from "classnames";
+
+import { Time, MessageStatus, MessageAudio, Avatar } from "../index";
+import { message } from "../../types/interfaces";
 import "./Message.scss";
-import { Time, MessageStatus, MessageAudio } from "../index";
 
 type Props = {
-  avatar: string;
-  text?: string;
-  date?: Date;
-  user?: any;
-  isMe?: boolean;
-  isReaded?: boolean;
-  attachments?: any;
-  isTyping?: boolean;
-  audio?: string;
+  message: message;
 };
 
-const Message: FunctionComponent<Props> = ({
-  avatar,
-  user,
-  text,
-  date,
-  isMe,
-  isReaded,
-  attachments,
-  isTyping,
-  audio,
-}) => {
+const Message: FunctionComponent<Props> = ({ message }) => {
   const classes = classNames("message", {
-    "message--me": isMe,
-    "message--typing": isTyping,
-    "message--image": attachments && attachments.length === 1,
-    "message--audio": audio,
+    "message--me": message.user.isMe,
+    "message--typing": message.isTyping,
+    "message--image": message.attachments && message.attachments.length === 1,
+    "message--audio": message.audio,
   });
 
   return (
     <div className={classes}>
       <div className="message__avatar">
-        <img src={avatar} alt={`Avatar ${user?.fullname}`} />
+        <Avatar user={message.user} />
       </div>
       <div className="message__content">
-        <MessageStatus isMe={isMe} isReaded={isReaded} />
+        <MessageStatus isMe={message.user.isMe} isReaded={message.isReaded} />
         <div className="message__info">
-          {(text || isTyping || audio) && (
+          {(message.text || message.isTyping || message.audio) && (
             <div className="message__bubble">
-              {text && <p className="message__text">{text}</p>}
-              {isTyping && (
+              {message.text && <p className="message__text">{message.text}</p>}
+              {message.isTyping && (
                 <div className="message__typing">
                   <span />
                   <span />
                   <span />
                 </div>
               )}
-              {audio && <MessageAudio audio={audio} />}
+              {message.audio && <MessageAudio audio={message.audio} />}
             </div>
           )}
-          {attachments && (
+          {message.attachments && (
             <div className="message__attachments">
-              {attachments.map((item: any, index: number) => {
+              {message.attachments.map((item: any, index: number) => {
                 return (
                   <div className="message__attachments-item" key={index}>
                     <img src={item.url} alt={item.filename} />
@@ -65,9 +49,9 @@ const Message: FunctionComponent<Props> = ({
               })}
             </div>
           )}
-          {date && (
+          {message.date && (
             <p className="message__date">
-              <Time date={date} />
+              <Time date={message.date} />
             </p>
           )}
         </div>

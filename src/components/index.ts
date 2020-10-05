@@ -10,3 +10,4 @@ export { default as Avatar } from "./avatar/Avatar";
 export { default as Status } from "./status/Status";
 export { default as ChatInput } from "./chat-input/ChatInput";
 export { default as Search } from "./search/Search";
+export { default as Messages } from "./messages/Messages";

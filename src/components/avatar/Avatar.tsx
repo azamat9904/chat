@@ -1,4 +1,5 @@
 import React, { FunctionComponent } from "react";
+
 import { userDialog } from "../../types/interfaces";
 import { generateAvatar } from "../../util/helpers/index";
 import "./Avatar.scss";

@@ -1,10 +1,11 @@
 import React, { FunctionComponent } from "react";
+
 import readSvg from "../../assets/img/readed.svg";
 import noReadSvg from "../../assets/img/noreaded.svg";
 
 type Props = {
-  isMe?: boolean;
-  isReaded?: boolean;
+  isMe: boolean;
+  isReaded: boolean | null;
 };
 
 const MessageStatus: FunctionComponent<Props> = ({ isMe, isReaded }) => {

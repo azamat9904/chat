@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import * as Icon from "@ant-design/icons";
 import { Input, Button } from "antd";
+
 import "./ChatInput.scss";
 
 const ChatInput = () => {

@@ -1,15 +1,16 @@
 import React, { FunctionComponent, useReducer } from "react";
+
 import { Dialogs as BaseDialogs } from "../components/index";
-import { dialog } from "../types/interfaces";
+import { message } from "../types/interfaces";
 
 enum actionTypes {
-  FILTER_VALUES = "FILTER_VALUES",
+  FILTER_ITEMS = "FILTER_ITEMS",
   SET_ITEMS = "SET_ITEMS",
 }
 
 type dialogState = {
   inputValue: string;
-  items: dialog[];
+  items: message[];
 };
 
 const searchReducer = (
@@ -17,15 +18,17 @@ const searchReducer = (
   action: { type: actionTypes; payload: dialogState }
 ) => {
   switch (action.type) {
-    case actionTypes.FILTER_VALUES:
+    case actionTypes.FILTER_ITEMS:
       return {
         items: action.payload.items.filter(
-          (item) => item.user.fullname.indexOf(action.payload.inputValue) >= 0
+          (item) =>
+            item.user.fullname
+              .toLowerCase()
+              .indexOf(action.payload.inputValue.toLowerCase()) >= 0
         ),
         inputValue: action.payload.inputValue,
       };
     case actionTypes.SET_ITEMS:
-      console.log(action.payload);
       return {
         inputValue: action.payload.inputValue,
         items: action.payload.items,
@@ -36,7 +39,7 @@ const searchReducer = (
 };
 
 type Props = {
-  items: dialog[];
+  items: message[];
 };
 
 const Dialogs: FunctionComponent<Props> = ({ items }) => {
@@ -46,7 +49,6 @@ const Dialogs: FunctionComponent<Props> = ({ items }) => {
   });
 
   const onChangeInput = (value: string) => {
-    console.log(state.items);
     if (!value.trim()) {
       dispatch({
         type: actionTypes.SET_ITEMS,
@@ -57,7 +59,7 @@ const Dialogs: FunctionComponent<Props> = ({ items }) => {
       });
     }
     dispatch({
-      type: actionTypes.FILTER_VALUES,
+      type: actionTypes.FILTER_ITEMS,
       payload: { inputValue: value, items: items },
     });
   };

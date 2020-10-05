@@ -23,26 +23,22 @@ export interface validationFields {
   password: string;
 }
 
-export interface obj {
-  [name: string]: string;
-}
-
 export interface userDialog {
   _id: string;
+  avatar: string | null;
   fullname: string;
-  online?: boolean;
-  avatar?: string | null;
-  isMe?: boolean;
+  isMe: boolean;
+  isOnline: boolean;
 }
 
 export interface message {
-  text: string;
-  isReaded?: boolean;
-  unreaded?: number;
-  created_at: string;
-}
-
-export interface dialog {
+  _id: string;
+  text: string | null;
+  date: string;
+  isReaded: boolean | null;
+  attachments: any | null;
+  isTyping: boolean;
+  audio: string | null;
+  unreaded: number | null;
   user: userDialog;
-  message: message;
 }

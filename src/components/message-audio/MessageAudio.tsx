@@ -1,5 +1,6 @@
 import React, { FunctionComponent, useState, useEffect, useRef } from "react";
 import { formatTime } from "../../util/helpers/index";
+
 import waveSvg from "../../assets/img/wave.svg";
 import playSvg from "../../assets/img/play.svg";
 import pauseSvg from "../../assets/img/pause.svg";

@@ -1,9 +1,10 @@
 import React from "react";
-import "./Home.scss";
 import * as Icon from "@ant-design/icons";
-import { Message, Status, ChatInput } from "../../components/index";
+
+import { Messages, Status, ChatInput } from "../../components/index";
 import { Dialogs } from "../../containers";
-import { items } from "../../data/mock";
+import { items, messages } from "../../data/mock";
+import "./Home.scss";
 
 const Home = () => {
   return (
@@ -31,7 +32,8 @@ const Home = () => {
             <Icon.EllipsisOutlined style={{ fontSize: "20px" }} />
           </div>
           <div className="chat__dialog-messages">
-            <Message
+            <Messages items={messages} />
+            {/* <Message
               avatar="https://4.bp.blogspot.com/-txKoWDBmvzY/XHAcBmIiZxI/AAAAAAAAC5o/wOkD9xoHn28Dl0EEslKhuI-OzP8_xvTUwCLcBGAs/s1600/2.jpg"
               text="Hello my friend!"
               date={new Date("Fri Sep 25 2020 22:26:30")}
@@ -75,8 +77,8 @@ const Home = () => {
                     "https://source.unsplash.com/100x100/?random=3&nature,water",
                 },
               ]}
-            />
-            <Message
+            /> */}
+            {/* <Message
               avatar="https://4.bp.blogspot.com/-txKoWDBmvzY/XHAcBmIiZxI/AAAAAAAAC5o/wOkD9xoHn28Dl0EEslKhuI-OzP8_xvTUwCLcBGAs/s1600/2.jpg"
               text="Hello my friend!"
               date={new Date("Fri Sep 25 2020 22:26:30")}
@@ -170,7 +172,7 @@ const Home = () => {
               avatar="https://www.mlive.com/resizer/WHw98KiEZAbpKg2rrlK1fiDBm98=/450x0/smart/cloudfront-us-east-1.images.arcpublishing.com/advancelocal/ETSJBFFEBNBCDG6BVGJWPZMVPI.jpg"
               audio="https://s1.muzter.net/files/mp3/tones_and_i_-_dance_monkey_muzter.net_128.mp3"
               date={new Date()}
-            />
+            /> */}
           </div>
           <ChatInput />
         </div>

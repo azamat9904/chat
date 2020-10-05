@@ -1,4 +1,5 @@
 import { withFormik } from "formik";
+
 import RegisterForm from "../components/RegisterForm";
 import { registerForm } from "../../../types/interfaces";
 import validateForm from "../../../util/validations";
