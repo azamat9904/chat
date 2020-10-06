@@ -1,76 +1,68 @@
-import React, { FunctionComponent, useReducer } from "react";
+import React, { FunctionComponent, useState, useEffect } from "react";
+import { connect } from "react-redux";
 
 import { Dialogs as BaseDialogs } from "../components/index";
 import { message } from "../types/interfaces";
-
-enum actionTypes {
-  FILTER_ITEMS = "FILTER_ITEMS",
-  SET_ITEMS = "SET_ITEMS",
-}
-
-type dialogState = {
-  inputValue: string;
-  items: message[];
-};
-
-const searchReducer = (
-  state: dialogState,
-  action: { type: actionTypes; payload: dialogState }
-) => {
-  switch (action.type) {
-    case actionTypes.FILTER_ITEMS:
-      return {
-        items: action.payload.items.filter(
-          (item) =>
-            item.user.fullname
-              .toLowerCase()
-              .indexOf(action.payload.inputValue.toLowerCase()) >= 0
-        ),
-        inputValue: action.payload.inputValue,
-      };
-    case actionTypes.SET_ITEMS:
-      return {
-        inputValue: action.payload.inputValue,
-        items: action.payload.items,
-      };
-    default:
-      return state;
-  }
-};
+import dialogActions from "../redux/dialog/actions";
+import { appState } from "../redux/store";
 
 type Props = {
   items: message[];
+  getDialogs: () => void;
+  setCurrentDialog: (id: string) => void;
 };
 
-const Dialogs: FunctionComponent<Props> = ({ items }) => {
-  const [state, dispatch] = useReducer(searchReducer, {
-    inputValue: "",
-    items: items,
-  });
+const Dialogs: FunctionComponent<Props> = ({
+  items,
+  getDialogs,
+  setCurrentDialog,
+}) => {
+  const [inputValue, setInputValue] = useState("");
+  const [filtered, setFiltered] = useState<message[]>(items);
+
+  useEffect(() => {
+    getDialogs();
+  }, [getDialogs]);
+
+  useEffect(() => {
+    setFiltered(items);
+  }, [items]);
 
   const onChangeInput = (value: string) => {
     if (!value.trim()) {
-      dispatch({
-        type: actionTypes.SET_ITEMS,
-        payload: {
-          inputValue: "",
-          items: items,
-        },
-      });
+      setFiltered(items);
+      setInputValue(value);
+      return;
     }
-    dispatch({
-      type: actionTypes.FILTER_ITEMS,
-      payload: { inputValue: value, items: items },
-    });
+
+    const f = items.filter(
+      (item) =>
+        item.user.fullname.toLowerCase().indexOf(value.toLowerCase()) >= 0
+    );
+
+    setFiltered(f);
+    setInputValue(value);
   };
 
   return (
     <BaseDialogs
-      items={state.items}
+      items={filtered}
       onSearch={onChangeInput}
-      inputValue={state.inputValue}
+      inputValue={inputValue}
+      onSelectDialog={setCurrentDialog}
     />
   );
 };
 
-export default Dialogs;
+const mapStateToProps = (state: appState) => {
+  return {
+    items: state.dialog.messages,
+  };
+};
+
+const mapDispatchToProps = {
+  getDialogs: dialogActions.fetchDialogs,
+  setCurrentDialog: dialogActions.setCurrentDialog,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Dialogs);

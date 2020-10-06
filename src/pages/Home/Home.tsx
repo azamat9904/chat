@@ -3,7 +3,7 @@ import * as Icon from "@ant-design/icons";
 
 import { Messages, Status, ChatInput } from "../../components/index";
 import { Dialogs } from "../../containers";
-import { items, messages } from "../../data/mock";
+import { messages } from "../../data/mock";
 import "./Home.scss";
 
 const Home = () => {
@@ -19,7 +19,7 @@ const Home = () => {
             <Icon.FormOutlined />
           </div>
           <div className="chat__sidebar-dialogs">
-            <Dialogs items={items} />
+            <Dialogs />
           </div>
         </div>
         <div className="chat__dialog">

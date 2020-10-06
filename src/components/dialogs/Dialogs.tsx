@@ -10,16 +10,22 @@ type Props = {
   items: message[];
   inputValue: string;
   onSearch: (value: string) => void;
+  onSelectDialog: (id: string) => void;
 };
 
-const Dialogs: FunctionComponent<Props> = ({ items, inputValue, onSearch }) => {
+const Dialogs: FunctionComponent<Props> = ({
+  items,
+  inputValue,
+  onSearch,
+  onSelectDialog,
+}) => {
   return (
     <div className="dialogs">
       <Search value={inputValue} onSearch={onSearch} />
       <div className="dialogs__list">
         {items.length !== 0 ? (
           orderBy(items, ["created_at", "desc"]).map((item, index) => (
-            <DialogItem key={index} message={item} />
+            <DialogItem onSelect={onSelectDialog} key={index} message={item} />
           ))
         ) : (
           <Empty

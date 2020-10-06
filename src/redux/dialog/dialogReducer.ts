@@ -3,10 +3,12 @@ import { message } from "../../types/interfaces";
 
 export interface dialogState {
   messages: message[];
+  currentDialog: message[] | null;
 }
 
 const initialState: dialogState = {
   messages: [],
+  currentDialog: null,
 };
 
 const dialogReducer = (
@@ -18,6 +20,11 @@ const dialogReducer = (
       return {
         ...state,
         messages: action.payload,
+      };
+    case actionTypes.SET_CURRENT_DIALOG:
+      return {
+        ...state,
+        currentDialog: action.payload,
       };
     default:
       return state;
