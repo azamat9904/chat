@@ -3,8 +3,8 @@ import dialogReducer from "./dialog/dialogReducer";
 import messageReducer from "./message/messageReducer";
 
 const reducers = combineReducers({
-  dialog: dialogReducer,
-  message: messageReducer,
+  dialogState: dialogReducer,
+  messageState: messageReducer,
 });
 
 export default reducers;

@@ -56,7 +56,7 @@ const Dialogs: FunctionComponent<Props> = ({
 
 const mapStateToProps = (state: appState) => {
   return {
-    items: state.dialog.messages,
+    items: state.dialogState.messages,
   };
 };
 

@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react";
-import { Empty } from "antd";
+import { Empty, Spin } from "antd";
+import { LoadingOutlined } from "@ant-design/icons";
 
 import { message } from "../../types/interfaces";
 import { Message } from "../index";
@@ -7,17 +8,27 @@ import "./Messages.scss";
 
 type Props = {
   items: message[];
+  isLoading: boolean;
 };
 
-export const Messages: FunctionComponent<Props> = ({ items }) => {
+export const Messages: FunctionComponent<Props> = ({ items, isLoading }) => {
+  const antIcon = <LoadingOutlined spin />;
   return (
     <>
-      {items.length !== 0 ? (
-        items.map((item, index) => <Message message={item} key={index} />)
-      ) : (
-        <div className="dialog-empty">
-          <Empty description="Откройте диалог" />
+      {isLoading ? (
+        <div className="message-spinner">
+          <Spin indicator={antIcon} tip="Загрузка сообщений..." size="large" />
         </div>
+      ) : (
+        <>
+          {items.length !== 0 ? (
+            items.map((item, index) => <Message message={item} key={index} />)
+          ) : (
+            <div className="dialog-empty">
+              <Empty description="Откройте диалог" />
+            </div>
+          )}
+        </>
       )}
     </>
   );

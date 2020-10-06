@@ -1,9 +1,8 @@
 import React from "react";
 import * as Icon from "@ant-design/icons";
 
-import { Messages, Status, ChatInput } from "../../components/index";
-import { Dialogs } from "../../containers";
-import { messages } from "../../data/mock";
+import { Status, ChatInput } from "../../components/index";
+import { Dialogs, Messages } from "../../containers";
 import "./Home.scss";
 
 const Home = () => {
@@ -32,7 +31,7 @@ const Home = () => {
             <Icon.EllipsisOutlined style={{ fontSize: "20px" }} />
           </div>
           <div className="chat__dialog-messages">
-            <Messages items={messages} />
+            <Messages />
             {/* <Message
               avatar="https://4.bp.blogspot.com/-txKoWDBmvzY/XHAcBmIiZxI/AAAAAAAAC5o/wOkD9xoHn28Dl0EEslKhuI-OzP8_xvTUwCLcBGAs/s1600/2.jpg"
               text="Hello my friend!"

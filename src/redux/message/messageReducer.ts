@@ -4,11 +4,13 @@ import { actionTypes } from "../message/actions";
 export interface messageState {
   messages: message[];
   currentDialogId: string | null;
+  isLoading: boolean;
 }
 
 const initalState: messageState = {
   messages: [],
   currentDialogId: null,
+  isLoading: false,
 };
 
 const messageReducer = (
@@ -20,6 +22,11 @@ const messageReducer = (
       return {
         ...state,
         messages: action.payload,
+      };
+    case actionTypes.SET_LOADING:
+      return {
+        ...state,
+        isLoading: action.payload,
       };
     default:
       return state;

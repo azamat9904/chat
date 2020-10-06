@@ -11,8 +11,8 @@ declare global {
 }
 
 export interface appState {
-  dialog: dialogState;
-  message: messageState;
+  dialogState: dialogState;
+  messageState: messageState;
 }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
