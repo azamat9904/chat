@@ -9,6 +9,7 @@ import { appState } from "../redux/store";
 type Props = {
   items: message[];
   getDialogs: () => void;
+  currentDialogId: string | null;
   setCurrentDialog: (id: string) => void;
 };
 
@@ -16,6 +17,7 @@ const Dialogs: FunctionComponent<Props> = ({
   items,
   getDialogs,
   setCurrentDialog,
+  currentDialogId,
 }) => {
   const [inputValue, setInputValue] = useState("");
   const [filtered, setFiltered] = useState<message[]>(items);
@@ -50,6 +52,7 @@ const Dialogs: FunctionComponent<Props> = ({
       onSearch={onChangeInput}
       inputValue={inputValue}
       onSelectDialog={setCurrentDialog}
+      currentDialogId={currentDialogId}
     />
   );
 };
@@ -57,6 +60,7 @@ const Dialogs: FunctionComponent<Props> = ({
 const mapStateToProps = (state: appState) => {
   return {
     items: state.dialogState.messages,
+    currentDialogId: state.dialogState.currentDialogId,
   };
 };
 

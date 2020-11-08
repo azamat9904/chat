@@ -19,11 +19,17 @@ const getMessageTime = (created_at: string) => {
 type Props = {
   message: message;
   onSelect: (id: string) => void;
+  isSelected: boolean;
 };
 
-const DialogItem: FunctionComponent<Props> = ({ message, onSelect }) => {
+const DialogItem: FunctionComponent<Props> = ({
+  message,
+  onSelect,
+  isSelected,
+}) => {
   const classes = classNames("dialogs__item", {
     "dialogs__item--online": message.user.isOnline,
+    "active" : isSelected,
   });
 
   return (

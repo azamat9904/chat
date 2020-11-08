@@ -11,6 +11,7 @@ type Props = {
   inputValue: string;
   onSearch: (value: string) => void;
   onSelectDialog: (id: string) => void;
+  currentDialogId: string | null;
 };
 
 const Dialogs: FunctionComponent<Props> = ({
@@ -18,6 +19,7 @@ const Dialogs: FunctionComponent<Props> = ({
   inputValue,
   onSearch,
   onSelectDialog,
+  currentDialogId,
 }) => {
   return (
     <div className="dialogs">
@@ -25,7 +27,12 @@ const Dialogs: FunctionComponent<Props> = ({
       <div className="dialogs__list">
         {items.length !== 0 ? (
           orderBy(items, ["created_at", "desc"]).map((item, index) => (
-            <DialogItem onSelect={onSelectDialog} key={index} message={item} />
+            <DialogItem
+              onSelect={onSelectDialog}
+              key={index}
+              message={item}
+              isSelected={item._id === currentDialogId}
+            />
           ))
         ) : (
           <Empty

@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useEffect } from "react";
+import React, { FunctionComponent, useEffect, useRef } from "react";
 import { connect } from "react-redux";
 
 import { Messages as BaseMessages } from "../components/messages/Messages";
@@ -19,11 +19,28 @@ const Messages: FunctionComponent<Props> = ({
   dialogId,
   isLoading,
 }) => {
+  const blockRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollToDown = (element: React.RefObject<HTMLDivElement>) => {
+    window.requestAnimationFrame(() => {
+      const scrollHeight = element.current!.scrollHeight;
+      element.current!.scrollTo(0, scrollHeight);
+    });
+  };
+
   useEffect(() => {
     if (dialogId) fetchMessages(dialogId);
   }, [dialogId, fetchMessages]);
 
-  return <BaseMessages items={messages} isLoading={isLoading} />;
+  useEffect(() => {
+    scrollToDown(blockRef);
+  }, [messages]);
+
+  return (
+    <div className="chat__dialog-messages" ref={blockRef}>
+      <BaseMessages items={messages} isLoading={isLoading} />
+    </div>
+  );
 };
 
 const mapStateToProps = (state: appState) => {
