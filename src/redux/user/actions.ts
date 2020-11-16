@@ -33,38 +33,22 @@ const actions = {
             dispatch(actions.setUserData(user));
         }
     },
-    fetchUserLogin: (postData: loginForm) => (dispatch: ThunkDispatch<appState, void, Action>) => {
-        return userApi
-        .login(postData)
-        .then(data => {
+    fetchUserLogin: (postData: loginForm) => async (dispatch: ThunkDispatch<appState, void, Action>) => {
+        try {
+            const data = await userApi.login(postData);
             const { status } = data;
             if (status === "success") {
-                openNotification(
-                    "Успех",
-                    "Авторизация прошла успешно!",
-                    2,
-                    "success"
-                );
+                openNotification("Успех", "Авторизация прошла успешно!", 2, "success");
                 const credential = JSON.stringify(data.token);
                 localStorage.setItem('token', credential);
                 axios.defaults.headers.common['token'] = data.token;
                 dispatch(actions.initMe());
                 return;
             }
-            openNotification(
-                "Ошибка при авторизации",
-                "Неверный логин или пароль",
-                2,
-                "error"
-            );
-        }).catch(() => {
-            openNotification(
-                "Ошибка при авторизации",
-                "Неверный логин или пароль",
-                2,
-                "error"
-            );
-        });
+            openNotification("Ошибка при авторизации", "Неверный логин или пароль", 2, "error");
+        } catch {
+            openNotification("Ошибка при авторизации", "Неверный логин или пароль", 2, "error");
+        }
     }
 };
 

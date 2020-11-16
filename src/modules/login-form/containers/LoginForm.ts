@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import authActions from '../../../redux/user/actions';
 
 interface MyFormProps {
-  signIn: (values: loginForm) => Promise<void>;
+  signIn: (values: loginForm) => void;
 }
 
 const LoginFormik = withFormik<MyFormProps, loginForm>({
@@ -22,10 +22,8 @@ const LoginFormik = withFormik<MyFormProps, loginForm>({
     return errors;
   },
 
-  handleSubmit: async (values, { setSubmitting, props }) => {
-    props.signIn(values).then(() => {
-      setSubmitting(false);
-    });
+  handleSubmit: async (values, { props }) => {
+    props.signIn(values);
   },
 })(LoginForm);
 
