@@ -41,7 +41,7 @@ const actions = {
         type: actionTypes.FETCH_USER_FAILED
     }),
     fetchUserLogin: (postData: loginForm) => (dispatch: ThunkDispatch<appState, void, Action>) => {
-        return userApi.login(postData).then((data) => {
+        userApi.login(postData).then((data) => {
             const { status } = data;
             if (status === "success") {
                 const credential = JSON.stringify(data.token);

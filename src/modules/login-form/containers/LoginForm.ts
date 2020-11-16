@@ -12,7 +12,6 @@ interface MyFormProps {
   loginFailed: boolean
 }
 
-
 const LoginFormik = withFormik<MyFormProps, loginForm>({
   mapPropsToValues: (): loginForm => {
     return {
