@@ -16,6 +16,7 @@ const LoginForm = (props: FormikProps<loginForm>) => {
     handleSubmit,
     touched,
     errors,
+    isSubmitting
   } = props;
 
   return (
@@ -63,12 +64,20 @@ const LoginForm = (props: FormikProps<loginForm>) => {
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" className="button" htmlType="submit">
+            <Button
+              type="primary"
+              className="button"
+              htmlType="submit"
+              disabled={isSubmitting}
+            >
               Войти в аккаунт
             </Button>
           </Form.Item>
         </Form>
-        <Link className="register-link" to="/register">
+        <Link
+          className="register-link"
+          to="/register"
+        >
           Зарегистрироваться
         </Link>
       </ShadowedBox>

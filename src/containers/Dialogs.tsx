@@ -22,13 +22,13 @@ const Dialogs: FunctionComponent<Props> = ({
   const [inputValue, setInputValue] = useState("");
   const [filtered, setFiltered] = useState<message[]>(items);
 
-  useEffect(() => {
-    getDialogs();
-  }, [getDialogs]);
+  // useEffect(() => {
+  //   getDialogs();
+  // }, [getDialogs]);
 
-  useEffect(() => {
-    setFiltered(items);
-  }, [items]);
+  // useEffect(() => {
+  //   setFiltered(items);
+  // }, [items]);
 
   const onChangeInput = (value: string) => {
     if (!value.trim()) {

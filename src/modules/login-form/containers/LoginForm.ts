@@ -2,8 +2,14 @@ import LoginForm from "../components/LoginForm";
 import { withFormik } from "formik";
 import { loginForm } from "../../../types/interfaces";
 import validateForm from "../../../util/validations";
+import { connect } from 'react-redux';
+import authActions from '../../../redux/user/actions';
 
-export default withFormik({
+interface MyFormProps {
+  signIn: (values: loginForm) => Promise<void>;
+}
+
+const LoginFormik = withFormik<MyFormProps, loginForm>({
   mapPropsToValues: (): loginForm => {
     return {
       email: "",
@@ -16,10 +22,15 @@ export default withFormik({
     return errors;
   },
 
-  handleSubmit: (values, { setSubmitting }) => {
-    setTimeout(() => {
-      alert(JSON.stringify(values));
+  handleSubmit: async (values, { setSubmitting, props }) => {
+    props.signIn(values).then(() => {
       setSubmitting(false);
-    }, 1000);
+    });
   },
 })(LoginForm);
+
+const mapDispatchToProps = {
+  signIn: authActions.fetchUserLogin
+}
+
+export default connect(null, mapDispatchToProps)(LoginFormik);
