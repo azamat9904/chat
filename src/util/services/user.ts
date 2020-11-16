@@ -1,5 +1,5 @@
 import { axios } from '../../core';
-import { loginForm } from '../../types/interfaces';
+import { loginForm, registerForm } from '../../types/interfaces';
 
 export default {
     login: (postData: loginForm) => {
@@ -7,5 +7,8 @@ export default {
     },
     getMe: () => {
         return axios.get('users/me').then(response => response.data);
+    },
+    register: (userData: registerForm) => {
+        return axios.post('users').then(response => response.data);
     }
 }
