@@ -4,7 +4,7 @@ import { Auth, Home } from "./pages/index";
 import { connect } from 'react-redux';
 import { appState } from "./redux/store";
 import userActions from './redux/user/actions';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Switch } from 'react-router-dom';
 
 type Props = {
   isAuth: boolean;
@@ -20,16 +20,16 @@ const App: FunctionComponent<Props> = ({ isAuth, initApp }) => {
   return (
     <div className="App">
       <div className="wrapper">
-        {
-          isAuth ?
-            <Route exact path="/" component={Home} />
-            : <Route exact path={["/login", "/register"]} component={Auth} />
-        }
-        {
-          isAuth ?
-            <Redirect to="/" />
-            : <Redirect to="/login" />
-        }
+        <Switch>
+          {
+            isAuth ?
+              <Route exact path="/" component={Home} />
+              : <Route exact path={["/login", "/register"]} component={Auth} />
+          }
+          {
+            isAuth ? <Redirect to="/" /> : <Redirect to="/login" />
+          }
+        </Switch>
       </div>
     </div>
   );
