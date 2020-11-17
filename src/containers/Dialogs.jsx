@@ -13,13 +13,13 @@ const Dialogs = ({
   const [inputValue, setInputValue] = useState("");
   const [filtered, setFiltered] = useState(items);
 
-  // useEffect(() => {
-  //   getDialogs();
-  // }, [getDialogs]);
+  useEffect(() => {
+    getDialogs();
+  }, [getDialogs]);
 
-  // useEffect(() => {
-  //   setFiltered(items);
-  // }, [items]);
+  useEffect(() => {
+    setFiltered(items);
+  }, [items]);
 
   const onChangeInput = (value) => {
     if (!value.trim()) {

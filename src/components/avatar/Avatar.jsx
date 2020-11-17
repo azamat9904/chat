@@ -3,13 +3,13 @@ import { generateAvatar } from "../../util/helpers/index";
 import "./Avatar.scss";
 
 
-const Avatar = ({ _id, fullname, avatar }) => {
-  const colors = generateAvatar(_id);
-  const firstChar = fullname.charAt(0).toUpperCase();
+const Avatar = ({ user }) => {
+  const colors = generateAvatar(user._id);
+  const firstChar = user.fullname.charAt(0).toUpperCase();
   const { color, colorLighten } = colors;
 
-  return avatar ? (
-    <img src={avatar} alt={`${fullname} avatar`} />
+  return user.avatar ? (
+    <img src={user.avatar} alt={`${user.fullname} avatar`} />
   ) : (
       <div
         className="avatar avatar--symbol"

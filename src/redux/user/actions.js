@@ -19,6 +19,35 @@ const actions = {
         type: actionTypes.SET_USER_DATA,
         payload: data
     }),
+    fetchUserClear: () => ({
+        type: actionTypes.FETCH_USER_CLEAR
+    }),
+    fetchUserSuccess: () => ({
+        type: actionTypes.FETCH_USER_SUCCESS
+    }),
+    fetchUserError: () => ({
+        type: actionTypes.FETCH_USER_FAILED
+    }),
+    registerSuccess: () => ({
+        type: actionTypes.REGISTER_SUCCESS
+    }),
+    registerFailed: (registerError) => ({
+        type: actionTypes.REGISTER_FAILED,
+        payload: registerError
+    }),
+    registerClear: () => ({
+        type: actionTypes.REGISTER_CLEAR
+    }),
+    verfyUserSuccess: () => ({
+        type: actionTypes.VERIFY_USER_SUCCESS
+    }),
+    verifyUserFailed: (error) => ({
+        type: actionTypes.VERIFY_USER_FAILED,
+        payload: error
+    }),
+    verifyUserClear: () => ({
+        type: actionTypes.VERIFY_USER_CLEAR
+    }),
     initMe: () => (dispatch) => {
         userApi.getMe().then((userData) => {
             const user = JSON.stringify(userData);
@@ -37,15 +66,6 @@ const actions = {
             dispatch(actions.setUserData(user));
         }
     },
-    fetchUserClear: () => ({
-        type: actionTypes.FETCH_USER_CLEAR
-    }),
-    fetchUserSuccess: () => ({
-        type: actionTypes.FETCH_USER_SUCCESS
-    }),
-    fetchUserError: () => ({
-        type: actionTypes.FETCH_USER_FAILED
-    }),
     fetchUserLogin: (postData, setSubmitting) => (dispatch) => {
         userApi.login(postData).then((data) => {
             if (setSubmitting) setSubmitting(false);
@@ -63,16 +83,6 @@ const actions = {
             dispatch(actions.fetchUserError());
         })
     },
-    registerSuccess: () => ({
-        type: actionTypes.REGISTER_SUCCESS
-    }),
-    registerFailed: (registerError) => ({
-        type: actionTypes.REGISTER_FAILED,
-        payload: registerError
-    }),
-    registerClear: () => ({
-        type: actionTypes.REGISTER_CLEAR
-    }),
     registerUser: (userData, setSubmitting) => (dispatch) => {
         userApi.register(userData).then(() => {
             if (setSubmitting) setSubmitting(false);
@@ -82,16 +92,6 @@ const actions = {
             dispatch(actions.registerFailed(e));
         })
     },
-    verfyUserSuccess: () => ({
-        type: actionTypes.VERIFY_USER_SUCCESS
-    }),
-    verifyUserFailed: (error) => ({
-        type: actionTypes.VERIFY_USER_FAILED,
-        payload: error
-    }),
-    verifyUserClear: () => ({
-        type: actionTypes.VERIFY_USER_CLEAR
-    }),
     verifyUser: (hash) => (dispatch) => {
         userApi.verifyUser(hash).then(() => {
             dispatch(actions.verfyUserSuccess());
