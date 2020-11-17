@@ -28,7 +28,13 @@ const userReducer = (
             return {
                 ...state,
                 loginFailed: true
-            }
+            };
+        case actionTypes.FETCH_USER_CLEAR:
+            return {
+                ...state,
+                loginFailed: false,
+                loginSuccess: false
+            };
         default:
             return state;
     }

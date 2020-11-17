@@ -4,8 +4,10 @@ import { axios } from "../../core";
 export const actionTypes = {
     SET_USER_DATA: "SET_USER_DATA",
     FETCH_USER_SUCCESS: "FETCH_USER_SUCCESS",
-    FETCH_USER_FAILED: "FETCH_USER_FAILED"
+    FETCH_USER_FAILED: "FETCH_USER_FAILED",
+    FETCH_USER_CLEAR: "FETCH_USER_CLEAR"
 }
+
 const actions = {
     setUserData: (data) => ({
         type: actionTypes.SET_USER_DATA,
@@ -28,14 +30,18 @@ const actions = {
             dispatch(actions.setUserData(user));
         }
     },
+    fetchUserClear: () => ({
+        type: actionTypes.FETCH_USER_CLEAR
+    }),
     fetchUserSuccess: () => ({
         type: actionTypes.FETCH_USER_SUCCESS
     }),
     fetchUserError: () => ({
         type: actionTypes.FETCH_USER_FAILED
     }),
-    fetchUserLogin: (postData) => (dispatch) => {
+    fetchUserLogin: (postData, setSubmitting) => (dispatch) => {
         userApi.login(postData).then((data) => {
+            if (setSubmitting) setSubmitting(false);
             const { status } = data;
             if (status === "success") {
                 const credential = JSON.stringify(data.token);
@@ -47,6 +53,7 @@ const actions = {
             }
             dispatch(actions.fetchUserError());
         }).catch(() => {
+            if (setSubmitting) setSubmitting(false);
             dispatch(actions.fetchUserError());
         })
     },
