@@ -1,2 +1,2 @@
-export { default as Auth } from "./Auth/Auth";
-export { default as Home } from "./Home/Home.jsx";
+export { default as Auth } from "./auth/Auth";
+export { default as Home } from "./home/Home";

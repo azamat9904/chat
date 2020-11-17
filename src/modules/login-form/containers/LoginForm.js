@@ -1,27 +1,54 @@
-import LoginForm from "../components/LoginForm";
-import { withFormik } from "formik";
-import validateForm from "../../../util/validations";
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useFormik } from 'formik';
+import { withRouter } from 'react-router-dom';
+
+import LoginForm from "../components/LoginForm";
+import validateForm from "../../../util/validations";
 import authActions from '../../../redux/user/actions';
+import { openNotification } from '../../../util/helpers';
 
-const LoginFormik = withFormik({
-  mapPropsToValues: () => {
-    return {
+const LoginContainer = (props) => {
+  const {
+    loginSuccess,
+    loginFailed,
+    signIn,
+    fetchUserClear,
+    history
+  } = props;
+
+  useEffect(() => {
+    if (loginSuccess) {
+      openNotification('Успех', 'Вы успешно авторизовались', 'success');
+      fetchUserClear();
+      history.push('/');
+    }
+
+    if (loginFailed) {
+      openNotification('Ошибка', 'Логин или пароль не правильный', 'error');
+      fetchUserClear();
+    }
+
+  }, [loginSuccess, loginFailed, fetchUserClear, history]);
+
+  const formik = useFormik({
+    initialValues: {
       email: "",
-      password: "",
-    };
-  },
-  validate: (values) => {
-    const errors = {};
-    validateForm({ isAuth: true, values, errors });
-    return errors;
-  },
-
-  handleSubmit: async (values, { props }) => {
-    props.signIn(values);
-    console.log(props.loginSuccess);
-  },
-})(LoginForm);
+      password: ''
+    },
+    validate: (values) => {
+      const errors = {};
+      validateForm({ isAuth: true, values, errors });
+      return errors;
+    },
+    onSubmit: (values, { setSubmitting }) => {
+      signIn(values, setSubmitting);
+    },
+  });
+  return (
+    <LoginForm {...formik} />
+  );
+};
 
 const mapStateToProps = (state) => {
   return {
@@ -32,6 +59,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   signIn: authActions.fetchUserLogin,
+  fetchUserClear: authActions.fetchUserClear
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginFormik);
+const withRouterProps = withRouter(LoginContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouterProps)

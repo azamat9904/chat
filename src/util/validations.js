@@ -1,28 +1,33 @@
 export default ({ isAuth, values, errors }) => {
   const rules = {
-    email: (errors, value) => {
+    email: value => {
       if (!value) {
-        errors.email = "Email is required";
-      } else if (!/(\w(=?@)\w+\.{1}[a-zA-Z]{2,})/i.test(value)) {
-        errors.email = "Email is invalid";
+        errors.email = "Введите E-Mail";
+      } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+        errors.email = "Неверный E-Mail";
       }
     },
-    password: (errors, value) => {
+    password: value => {
       if (!value) {
-        errors.password = "Password is required";
-      } else if (!/(?=.*[0-9])/i.test(value)) {
-        errors.password = isAuth
-          ? "Неверный пароль"
-          : "Password should contain number";
+        errors.password = "Введите пароль";
+      } else if (
+        !isAuth &&
+        !/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/.test(value)
+      ) {
+        errors.password = "Слишком лёгкий пароль";
       }
     },
+    repeatPassword: value => {
+      if (!isAuth && value !== values.password) {
+        errors.repeatPassword = "Пароли не совпадают";
+      }
+    },
+    fullname: value => {
+      if (!isAuth && !value) {
+        errors.fullname = "Укажите свое имя и фамилию";
+      }
+    }
   };
 
-  Object.keys(values).forEach((key) => {
-    rules[key] &&
-      rules[key](
-        errors,
-        values[key]
-      );
-  });
+  Object.keys(values).forEach(key => rules[key] && rules[key](values[key]));
 };

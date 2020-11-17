@@ -31,7 +31,6 @@ const LoginForm = (props) => {
           <Form.Item
             name="email"
             validateStatus={validateField("email", touched, errors)}
-            hasFeedback
             help={!touched.email ? null : errors.email}
           >
             <Input
@@ -46,7 +45,6 @@ const LoginForm = (props) => {
           <Form.Item
             name="password"
             validateStatus={validateField("password", touched, errors)}
-            hasFeedback
             help={!touched.password ? null : errors.password}
           >
             <Input

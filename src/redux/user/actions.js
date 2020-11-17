@@ -5,7 +5,13 @@ export const actionTypes = {
     SET_USER_DATA: "SET_USER_DATA",
     FETCH_USER_SUCCESS: "FETCH_USER_SUCCESS",
     FETCH_USER_FAILED: "FETCH_USER_FAILED",
-    FETCH_USER_CLEAR: "FETCH_USER_CLEAR"
+    FETCH_USER_CLEAR: "FETCH_USER_CLEAR",
+    REGISTER_SUCCESS: "REGISTER_SUCCESS",
+    REGISTER_FAILED: "REGISTER_FAILED",
+    REGISTER_CLEAR: "REGISTER_CLEAR",
+    VERIFY_USER_SUCCESS: "VERIFY_USER_SUCCESS",
+    VERIFY_USER_FAILED: "VERIFY_USER_FAILED",
+    VERIFY_USER_CLEAR: "VERIFY_USER_CLEAR"
 }
 
 const actions = {
@@ -18,6 +24,7 @@ const actions = {
             const user = JSON.stringify(userData);
             localStorage.setItem('user', user);
             dispatch(actions.setUserData(userData));
+            dispatch(actions.fetchUserSuccess());
         });
     },
     initApp: () => (dispatch) => {
@@ -48,7 +55,6 @@ const actions = {
                 localStorage.setItem('token', credential);
                 axios.defaults.headers.common['token'] = data.token;
                 dispatch(actions.initMe());
-                dispatch(actions.fetchUserSuccess());
                 return;
             }
             dispatch(actions.fetchUserError());
@@ -57,9 +63,41 @@ const actions = {
             dispatch(actions.fetchUserError());
         })
     },
-
-    registerUser: (userData) => async (dispatch) => {
-
+    registerSuccess: () => ({
+        type: actionTypes.REGISTER_SUCCESS
+    }),
+    registerFailed: (registerError) => ({
+        type: actionTypes.REGISTER_FAILED,
+        payload: registerError
+    }),
+    registerClear: () => ({
+        type: actionTypes.REGISTER_CLEAR
+    }),
+    registerUser: (userData, setSubmitting) => (dispatch) => {
+        userApi.register(userData).then(() => {
+            if (setSubmitting) setSubmitting(false);
+            dispatch(actions.registerSuccess());
+        }).catch((e) => {
+            if (setSubmitting) setSubmitting(false);
+            dispatch(actions.registerFailed(e));
+        })
+    },
+    verfyUserSuccess: () => ({
+        type: actionTypes.VERIFY_USER_SUCCESS
+    }),
+    verifyUserFailed: (error) => ({
+        type: actionTypes.VERIFY_USER_FAILED,
+        payload: error
+    }),
+    verifyUserClear: () => ({
+        type: actionTypes.VERIFY_USER_CLEAR
+    }),
+    verifyUser: (hash) => (dispatch) => {
+        userApi.verifyUser(hash).then(() => {
+            dispatch(actions.verfyUserSuccess());
+        }).catch((e) => {
+            dispatch(actions.verifyUserFailed(e.response.data));
+        })
     }
 };
 

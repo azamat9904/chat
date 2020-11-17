@@ -16,13 +16,11 @@ const App = ({ isAuth, initApp }) => {
     <div className="App">
       <div className="wrapper">
         <Switch>
+          <Route exact path={["/login", "/register", '/email/check']} component={Auth} />
           {
             isAuth ?
               <Route exact path="/" component={Home} />
-              : <Route exact path={["/login", "/register"]} component={Auth} />
-          }
-          {
-            isAuth ? <Redirect to="/" /> : <Redirect to="/login" />
+              : <Redirect to="/login" />
           }
         </Switch>
       </div>
