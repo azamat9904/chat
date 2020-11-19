@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import userActions from './redux/user/actions';
 import { Switch } from 'react-router-dom';
 
-
 const App = ({ isAuth, initApp }) => {
 
   useEffect(() => {

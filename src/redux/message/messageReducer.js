@@ -21,6 +21,14 @@ const messageReducer = (
         ...state,
         isLoading: action.payload,
       };
+    case actionTypes.ADD_MESSAGE:
+      return {
+        ...state,
+        messages: [
+          ...state.messages,
+          action.payload
+        ]
+      }
     default:
       return state;
   }

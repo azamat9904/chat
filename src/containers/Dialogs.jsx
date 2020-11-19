@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 
 import { Dialogs as BaseDialogs } from "../components/index";
 import dialogActions from "../redux/dialog/actions";
+import socketActions from '../core/socket';
 
 const Dialogs = ({
   items,
@@ -12,6 +13,11 @@ const Dialogs = ({
 }) => {
   const [inputValue, setInputValue] = useState("");
   const [filtered, setFiltered] = useState(items);
+
+  useEffect(() => {
+    socketActions.dialogCreatedListener(getDialogs);
+  }, []);
+
 
   useEffect(() => {
     getDialogs();

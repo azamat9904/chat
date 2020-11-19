@@ -25,7 +25,6 @@ const DialogItem = ({
     "dialogs__item--online": message.lastMessage.user.isOnline,
     "active": isSelected,
   });
-
   return (
     <div className={classes} onClick={() => onSelect(message._id)}>
       <div className="dialogs__item-avatar">
@@ -37,7 +36,7 @@ const DialogItem = ({
           <span>{getMessageTime(message.lastMessage.createdAt)}</span>
         </div>
         <div className="dialogs__item-info-bottom">
-          <p>{message.text}</p>
+          <p>{message.lastMessage.text}</p>
           <MessageStatus isMe={message.lastMessage.user.isMe} isReaded={message.isReaded} />
           {message.unreaded && message.unreaded > 0 && (
             <div className="dialogs__item-info-bottom-count">

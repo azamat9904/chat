@@ -7,6 +7,7 @@ import "./Messages.scss";
 
 export const Messages = ({ items, isLoading }) => {
   const antIcon = <LoadingOutlined spin />;
+  
   return (
     <>
       {isLoading ? (
