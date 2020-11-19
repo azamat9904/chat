@@ -12,5 +12,8 @@ export default {
     },
     verifyUser: (hash) => {
         return axios.get('users/verify?hash=' + hash).then(response => response.data);
+    },
+    findUser: (query) => {
+        return axios.get('users/find?query=' + query).then(response => response.data);
     }
 }

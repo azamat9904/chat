@@ -14,9 +14,18 @@ const actions = {
     type: actionTypes.SET_CURRENT_DIALOG_ID,
     payload: id,
   }),
-  fetchDialogs: () => (dispatch) => {
-    dialogApi.getAll().then((data) => {
-      dispatch(actions.setDialogs(data));
+  fetchDialogs: () => (dispatch, getState) => {
+    dialogApi.getAll().then((dialogs) => {
+      const { userState } = getState();
+      const { user } = userState;
+      dialogs.forEach((dialog) => {
+        if (user._id === dialog.author._id) {
+          dialog.buddy = dialog.partner;
+          return;
+        }
+        dialog.buddy = dialog.author;
+      })
+      dispatch(actions.setDialogs(dialogs));
     });
   },
 };

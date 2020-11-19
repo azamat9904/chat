@@ -8,9 +8,8 @@ const Status = ({ currentDialogId, myId, dialogs }) => {
     let fullname = null;
 
     if (currentDialog) {
-        const partner = myId === currentDialog.author._id ? currentDialog.partner : currentDialog.author;
-        isOnline = partner.isOnline;
-        fullname = partner.fullname;
+        isOnline = currentDialog.buddy.isOnline;
+        fullname = currentDialog.buddy.fullname;
     }
 
     return <StatusBase online={isOnline} fullname={fullname} />

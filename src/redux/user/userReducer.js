@@ -12,7 +12,9 @@ const initialState = {
     verifyUserSuccess: false,
     verifyUserFailed: false,
     verifyUserError: null,
-    verifyUserClear: false
+    verifyUserClear: false,
+    searchedUsers: [],
+    searchedUsersError: null
 };
 
 const userReducer = (
@@ -78,6 +80,22 @@ const userReducer = (
                 verifyUserFailed: false,
                 verifyUserError: null
             };
+        case actionTypes.SEARCH_USER_SUCCESS:
+            return {
+                ...state,
+                searchedUsers: action.payload
+            };
+        case actionTypes.SEARCH_USER_FAILED:
+            return {
+                ...state,
+                searchedUsersError: action.payload
+            };
+        case actionTypes.SEARCH_USER_CLEAR:
+            return {
+                ...state,
+                searchedUsersError: null,
+                searchedUsers: []
+            }
         default:
             return state;
     }

@@ -6,25 +6,57 @@ import { DialogItem } from "../index";
 import { Search } from "../index";
 
 const Dialogs = ({
-  items,
+  dialogs,
+  globalUsers,
   inputValue,
   onSearch,
   onSelectDialog,
   currentDialogId,
   myId
 }) => {
+  const myFriendsList = dialogs.length !== 0 ?
+    orderBy(dialogs, ["created_at", "desc"]).map((dialog, index) => (
+      <DialogItem
+        onSelect={onSelectDialog}
+        key={index}
+        message={dialog}
+        isSelected={dialog._id === currentDialogId}
+        myId={myId}
+        globalUser={false}
+      />
+    )) : null;
+
+
+  const otherUserLists = globalUsers.length !== 0 ?
+    orderBy(globalUsers).map((dialog, index) => (
+      <DialogItem
+        onSelect={onSelectDialog}
+        key={index}
+        message={dialog}
+        isSelected={dialog._id === currentDialogId}
+        myId={myId}
+        globalUser={true}
+      />
+    )) : null;
+
+
   return (
     <div className="dialogs">
       <Search value={inputValue} onSearch={onSearch} />
       <div className="dialogs__list">
-        {items.length !== 0 ? (
-          orderBy(items, ["created_at", "desc"]).map((item, index) => (
+        {dialogs.length !== 0 ? (
+          orderBy(dialogs, ["created_at", "desc"]).map((dialog, index) => (
             <DialogItem
+              user={dialog.buddy}
               onSelect={onSelectDialog}
+              messageCreatedAt={dialog.lastMessage.createdAt}
+              messageText={dialog.lastMessage.text}
+              messageIsReaded={dialog.lastMessage.isReaded}
+              messageUnreaded={dialog.lastMessage.unreaded}
               key={index}
-              message={item}
-              isSelected={item._id === currentDialogId}
+              isSelected={dialog._id === currentDialogId}
               myId={myId}
+              messageId={dialog._id}
             />
           ))
         ) : (

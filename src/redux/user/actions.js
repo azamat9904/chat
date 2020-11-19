@@ -11,7 +11,10 @@ export const actionTypes = {
     REGISTER_CLEAR: "REGISTER_CLEAR",
     VERIFY_USER_SUCCESS: "VERIFY_USER_SUCCESS",
     VERIFY_USER_FAILED: "VERIFY_USER_FAILED",
-    VERIFY_USER_CLEAR: "VERIFY_USER_CLEAR"
+    VERIFY_USER_CLEAR: "VERIFY_USER_CLEAR",
+    SEARCH_USER_SUCCESS: "SEARCH_USER_SUCCESS",
+    SEARCH_USER_FAILED: "SEARCH_USER_FAILED",
+    SEARCH_USER_CLEAR: "SEARCH_USER_CLEAR"
 }
 
 const actions = {
@@ -47,6 +50,17 @@ const actions = {
     }),
     verifyUserClear: () => ({
         type: actionTypes.VERIFY_USER_CLEAR
+    }),
+    searchUserSuccess: (users) => ({
+        type: actionTypes.SEARCH_USER_SUCCESS,
+        payload: users
+    }),
+    searchUserFailed: (error) => ({
+        type: actionTypes.SEARCH_USER_FAILED,
+        payload: error
+    }),
+    searchUserClear: () => ({
+        type: actionTypes.SEARCH_USER_CLEAR
     }),
     initMe: () => (dispatch) => {
         userApi.getMe().then((userData) => {
@@ -97,6 +111,13 @@ const actions = {
             dispatch(actions.verfyUserSuccess());
         }).catch((e) => {
             dispatch(actions.verifyUserFailed(e.response.data));
+        })
+    },
+    findUsers: (query) => (dispatch) => {
+        userApi.findUser(query).then(users => {
+            dispatch(actions.searchUserSuccess(users));
+        }).catch((e) => {
+            dispatch(actions.searchUserFailed(e.response));
         })
     }
 };
