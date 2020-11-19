@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import { Dialogs as BaseDialogs } from "../components/index";
 import dialogActions from "../redux/dialog/actions";
-import socketActions from '../core/socket';
+import socketActions, { socketActionTypes } from '../core/socket';
 
 const Dialogs = ({
   items,
@@ -17,6 +17,9 @@ const Dialogs = ({
 
   useEffect(() => {
     socketActions.dialogCreatedListener(getDialogs);
+    return () => {
+      socketActions.removeListener(socketActionTypes.DIALOG_CREATED, getDialogs)
+    }
   }, []);
 
 

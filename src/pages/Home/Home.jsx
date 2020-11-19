@@ -1,8 +1,8 @@
 import React from "react";
 import * as Icon from "@ant-design/icons";
 
-import { Status, ChatInput } from "../../components/index";
-import { Dialogs, Messages } from "../../containers";
+import { Status } from "../../components/index";
+import { Dialogs, Messages, ChatInput } from "../../containers";
 import "./Home.scss";
 
 const Home = () => {

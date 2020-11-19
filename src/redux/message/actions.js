@@ -40,6 +40,15 @@ const actions = {
         dispatch(actions.setLoading(false));
       });
   },
+  createMessage: (text) => (dispatch, getState) => {
+    const { dialogState } = getState();
+    const { currentDialogId } = dialogState;
+    messageApi.createMessage(text, currentDialogId).then((data) => {
+      console.log(data);
+    }).catch((e) => {
+      console.log(e);
+    })
+  }
 };
 
 export default actions;

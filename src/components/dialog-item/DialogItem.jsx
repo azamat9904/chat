@@ -28,6 +28,7 @@ const DialogItem = ({
   });
   const partner = myId === message.author.id ? message.partner : message.author;
   const isMe = myId === message.lastMessage.user._id;
+  
   return (
     <div className={classes} onClick={() => onSelect(message._id)}>
       <div className="dialogs__item-avatar">

@@ -8,15 +8,11 @@ export const socketActionTypes = {
 };
 
 const dialogCreatedListener = (getDialogs) => {
-    socket.on(socketActionTypes.DIALOG_CREATED, () => {
-        getDialogs();
-    });
+    socket.on(socketActionTypes.DIALOG_CREATED, getDialogs);
 }
 
 const messageCreatedListener = (getMessages) => {
-    socket.on(socketActionTypes.NEW_MESSAGE, (data) => {
-        getMessages(data);
-    })
+    socket.on(socketActionTypes.NEW_MESSAGE, getMessages);
 }
 
 const removeListener = (name, func) => {
