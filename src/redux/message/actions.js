@@ -43,8 +43,8 @@ const actions = {
   createMessage: (text) => (dispatch, getState) => {
     const { dialogState } = getState();
     const { currentDialogId } = dialogState;
-    messageApi.createMessage(text, currentDialogId).then((data) => {
-      console.log(data);
+    messageApi.createMessage(text, currentDialogId).then((d) => {
+      console.log(d);
     }).catch((e) => {
       console.log(e);
     })

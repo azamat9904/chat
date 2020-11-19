@@ -3,12 +3,26 @@ import classNames from "classnames";
 
 import "./Status.scss";
 
-const Status = ({ online }) => {
+const Status = ({ online, fullname }) => {
   const classes = classNames("status", { "status--online": online });
 
+  const getStatus = (isOnline) => {
+    switch (isOnline) {
+      case true:
+        return 'Онлайн';
+      case false:
+        return 'Оффлайн';
+      default:
+        return '';
+    }
+  }
+
   return (
-    <div className="status-wrapper">
-      <span className={classes}>{online ? "онлайн" : "офлайн"}</span>
+    <div className="chat__dialog-center">
+      <b className="chat__dialog-fullname">{fullname}</b>
+      <div className="status-wrapper">
+        {online !== null && <span className={classes}>{getStatus(online)}</span>}
+      </div>
     </div>
   );
 };

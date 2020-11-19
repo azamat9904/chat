@@ -18,16 +18,12 @@ const Messages = ({
   const blockRef = useRef(null);
 
   useEffect(() => {
-    if (dialogId) {
+    if (dialogId)
       fetchMessages(dialogId);
-    }
-
     const createMessageHandler = (message) => {
       increaseMessage(message);
     }
-
     socketActions.messageCreatedListener(createMessageHandler);
-
     return () => {
       socketActions.removeListener(socketActionTypes.NEW_MESSAGE, createMessageHandler);
     }

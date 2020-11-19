@@ -15,6 +15,8 @@ const Dialogs = ({
   const [inputValue, setInputValue] = useState("");
   const [filtered, setFiltered] = useState(items);
 
+  console.log(items);
+
   useEffect(() => {
     socketActions.dialogCreatedListener(getDialogs);
     return () => {
