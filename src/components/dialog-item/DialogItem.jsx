@@ -20,12 +20,12 @@ const DialogItem = ({
   user,
   onSelect,
   isSelected,
-  myId,
   messageCreatedAt,
   messageText,
   messageIsReaded,
   messageUnreaded,
-  messageId
+  messageId,
+  isMe
 }) => {
   const classes = classNames("dialogs__item", {
     "dialogs__item--online": user.isOnline,
@@ -44,7 +44,7 @@ const DialogItem = ({
         </div>
         <div className="dialogs__item-info-bottom">
           <p>{messageText}</p>
-          <MessageStatus isMe={myId === user._id} isReaded={messageIsReaded} />
+          <MessageStatus isMe={isMe} isReaded={messageIsReaded} />
           {messageUnreaded && messageUnreaded > 0 && (
             <div className="dialogs__item-info-bottom-count">
               {messageUnreaded > 9 ? "+9" : messageUnreaded}
