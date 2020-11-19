@@ -5,9 +5,9 @@ import { LoadingOutlined } from "@ant-design/icons";
 import { Message } from "../index";
 import "./Messages.scss";
 
-export const Messages = ({ items, isLoading }) => {
+export const Messages = ({ items, isLoading, myId }) => {
   const antIcon = <LoadingOutlined spin />;
-  
+
   return (
     <>
       {isLoading ? (
@@ -17,7 +17,7 @@ export const Messages = ({ items, isLoading }) => {
       ) : (
           <>
             {items.length !== 0 ? (
-              items.map((item, index) => <Message message={item} key={index} />)
+              items.map((item, index) => <Message message={item} key={index} isMe={item.user.id === myId} />)
             ) : (
                 <div className="dialog-empty">
                   <Empty description="Откройте диалог" />

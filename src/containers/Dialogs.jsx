@@ -10,6 +10,7 @@ const Dialogs = ({
   getDialogs,
   setCurrentDialog,
   currentDialogId,
+  myId
 }) => {
   const [inputValue, setInputValue] = useState("");
   const [filtered, setFiltered] = useState(items);
@@ -50,6 +51,7 @@ const Dialogs = ({
       inputValue={inputValue}
       onSelectDialog={setCurrentDialog}
       currentDialogId={currentDialogId}
+      myId={myId}
     />
   );
 };
@@ -58,6 +60,7 @@ const mapStateToProps = (state) => {
   return {
     items: state.dialogState.messages,
     currentDialogId: state.dialogState.currentDialogId,
+    myId: state.userState.user._id
   };
 };
 

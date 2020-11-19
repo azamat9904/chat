@@ -11,6 +11,7 @@ const Dialogs = ({
   onSearch,
   onSelectDialog,
   currentDialogId,
+  myId
 }) => {
   return (
     <div className="dialogs">
@@ -23,6 +24,7 @@ const Dialogs = ({
               key={index}
               message={item}
               isSelected={item._id === currentDialogId}
+              myId={myId}
             />
           ))
         ) : (

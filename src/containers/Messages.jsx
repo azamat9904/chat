@@ -11,7 +11,8 @@ const Messages = ({
   fetchMessages,
   dialogId,
   isLoading,
-  increaseMessage
+  increaseMessage,
+  myId
 }) => {
 
   const blockRef = useRef(null);
@@ -47,7 +48,7 @@ const Messages = ({
 
   return (
     <div className="chat__dialog-messages" ref={blockRef}>
-      <BaseMessages items={messages} isLoading={isLoading} />
+      <BaseMessages items={messages} isLoading={isLoading} myId={myId} />
     </div>
   );
 };
@@ -57,6 +58,7 @@ const mapStateToProps = (state) => {
     messages: state.messageState.messages,
     dialogId: state.dialogState.currentDialogId,
     isLoading: state.messageState.isLoading,
+    myId: state.userState.user._id
   };
 };
 

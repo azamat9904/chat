@@ -24,7 +24,7 @@ const actions = {
     const { dialogState } = getState();
     const { currentDialogId } = dialogState;
 
-    if (currentDialogId == message.dialog._id) {
+    if (currentDialogId === message.dialog._id) {
       dispatch(actions.addMessage(message));
     }
   },

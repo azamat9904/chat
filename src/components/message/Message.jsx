@@ -4,9 +4,9 @@ import classNames from "classnames";
 import { Time, MessageStatus, MessageAudio, Avatar } from "../index";
 import "./Message.scss";
 
-const Message = ({ message }) => {
+const Message = ({ message, isMe }) => {
   const classes = classNames("message", {
-    "message--me": message.user.isMe,
+    "message--me": isMe,
     "message--typing": message.isTyping,
     "message--image": message.attachments && message.attachments.length === 1,
     "message--audio": message.audio,

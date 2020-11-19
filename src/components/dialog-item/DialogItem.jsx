@@ -20,24 +20,27 @@ const DialogItem = ({
   message,
   onSelect,
   isSelected,
+  myId
 }) => {
   const classes = classNames("dialogs__item", {
     "dialogs__item--online": message.lastMessage.user.isOnline,
     "active": isSelected,
   });
+  const partner = myId === message.author.id ? message.partner : message.author;
+  const isMe = myId === message.lastMessage.user._id;
   return (
     <div className={classes} onClick={() => onSelect(message._id)}>
       <div className="dialogs__item-avatar">
-        <Avatar user={message.lastMessage.user} />
+        <Avatar user={partner} />
       </div>
       <div className="dialogs__item-info">
         <div className="dialogs__item-info-top">
-          <b>{message.lastMessage.user.fullname}</b>
+          <b>{partner.fullname}</b>
           <span>{getMessageTime(message.lastMessage.createdAt)}</span>
         </div>
         <div className="dialogs__item-info-bottom">
           <p>{message.lastMessage.text}</p>
-          <MessageStatus isMe={message.lastMessage.user.isMe} isReaded={message.isReaded} />
+          <MessageStatus isMe={isMe} isReaded={message.isReaded} />
           {message.unreaded && message.unreaded > 0 && (
             <div className="dialogs__item-info-bottom-count">
               {message.unreaded > 9 ? "+9" : message.unreaded}
