@@ -37,7 +37,7 @@ const Dialogs = ({
     }
   }, [getDialogs]);
 
-  
+
   useEffect(() => {
     if (queryParamKey == 'id' && queryParamValue) {
       const selectedDialog = dialogs.find((dialog) => dialog._id === queryParamValue);
@@ -45,7 +45,6 @@ const Dialogs = ({
         setCurrentDialog(selectedDialog);
         return;
       }
-      props.history.push('/dialogs');
     }
   }, [dialogs, queryParamKey, queryParamValue])
 
@@ -80,6 +79,7 @@ const Dialogs = ({
 
   const onUserSelect = (userId) => {
     const selectedUser = globalUsers.find((user) => user._id === userId);
+    props.history.push('/dialogs');
     setSelectedUser(selectedUser);
     clearMessages();
     setInputValue("");

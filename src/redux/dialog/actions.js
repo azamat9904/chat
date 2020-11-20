@@ -41,8 +41,9 @@ const actions = {
     type: actionTypes.CREATE_DIALOG_FAILED,
     payload: error
   }),
-  createDialogSuccess: () => ({
-    type: actionTypes.CREATE_DIALOG_SUCCESS
+  createDialogSuccess: (dialogId) => ({
+    type: actionTypes.CREATE_DIALOG_SUCCESS,
+    payload: dialogId
   }),
   createDialogClear: () => ({
     type: actionTypes.CREATE_DIALOG_CLEAR
@@ -50,8 +51,8 @@ const actions = {
   createDialog: (text) => (dispatch, getState) => {
     const { dialogState } = getState();
     const { selectedUser } = dialogState;
-    dialogApi.createDialog(selectedUser._id, text).then(() => {
-      dispatch(actions.createDialogSuccess());
+    dialogApi.createDialog(selectedUser._id, text).then((dialog) => {
+      dispatch(actions.createDialogSuccess(dialog._id));
     }).catch((e) => {
       dispatch(actions.createDialogFailed(e.response));
     })

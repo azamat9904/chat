@@ -5,7 +5,8 @@ const initialState = {
   currentDialog: null,
   selectedUser: null,
   createDialogError: null,
-  createDialogSuccess: null
+  createDialogSuccess: null,
+  dialogId: null
 };
 
 const dialogReducer = (
@@ -33,18 +34,22 @@ const dialogReducer = (
     case actionTypes.CREATE_DIALOG_SUCCESS:
       return {
         ...state,
-        createDialogSuccess: true
+        createDialogSuccess: true,
+        dialogId: action.payload
       };
     case actionTypes.CREATE_DIALOG_FAILED:
       return {
         ...state,
-        createDialogError: action.payload
+        createDialogError: action.payload,
+        dialogId: null,
+        createDialogSuccess: null
       };
     case actionTypes.CREATE_DIALOG_CLEAR:
       return {
         ...state,
         createDialogError: null,
-        createDialogSuccess: null
+        createDialogSuccess: null,
+        dialogId: null
       }
     default:
       return state;
