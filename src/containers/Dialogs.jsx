@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { Dialogs as BaseDialogs } from "../components/index";
 import dialogActions from "../redux/dialog/actions";
 import userActions from "../redux/user/actions";
+import messageActions from '../redux/message/actions';
 
 import socketActions, { socketActionTypes } from '../core/socket';
 
@@ -14,11 +15,15 @@ const Dialogs = ({
   currentDialogId,
   myId,
   findUsers,
-  globalUsers
+  globalUsers,
+  clearGlobalSearch,
+  setSelectedUser,
+  clearMessages
 }) => {
   const [inputValue, setInputValue] = useState("");
   const [filtered, setFiltered] = useState([]);
   const [otherUsers, setOtherUsers] = useState([]);
+  const [timerId, setTimerId] = useState('');
 
   useEffect(() => {
     getDialogs();
@@ -52,19 +57,38 @@ const Dialogs = ({
   }, [dialogs]);
 
 
+  const onDialogSelect = (dialogId) => {
+    const selectedDialog = dialogs.find((dialog) => dialog._id === dialogId);
+    setCurrentDialog(selectedDialog);
+  }
+
+  const onUserSelect = (userId) => {
+    const selectedUser = globalUsers.find((user) => user._id === userId);
+    setSelectedUser(selectedUser);
+    clearMessages();
+  }
+
   const onChangeInput = (value) => {
-    if (!value.trim()) {
-      setFiltered(dialogs);
+    clearTimeout(timerId);
+
+    const timer = setTimeout(() => {
+      if (!value) {
+        clearGlobalSearch();
+        setFiltered(dialogs);
+        setInputValue("");
+        return;
+      }
+      const f = dialogs.filter(
+        (dialog) =>
+          dialog.buddy.fullname.toLowerCase().indexOf(value.toLowerCase()) >= 0
+          || dialog.buddy.email.toLowerCase().indexOf(value.toLowerCase()) >= 0
+      );
+      findUsers(value);
+      setFiltered(f);
       setInputValue(value);
-      return;
-    }
-    const f = dialogs.filter(
-      (dialog) =>
-        dialog.buddy.fullname.toLowerCase().indexOf(value.toLowerCase()) >= 0
-    );
-    findUsers(value);
-    setFiltered(f);
-    setInputValue(value);
+    }, 100);
+
+    setTimerId(timer);
   };
 
   return (
@@ -73,7 +97,8 @@ const Dialogs = ({
       globalUsers={otherUsers}
       onSearch={onChangeInput}
       inputValue={inputValue}
-      onSelectDialog={setCurrentDialog}
+      onDialogSelect={onDialogSelect}
+      onUserSelect={onUserSelect}
       currentDialogId={currentDialogId}
       myId={myId}
     />
@@ -85,14 +110,17 @@ const mapStateToProps = (state) => {
     dialogs: state.dialogState.messages,
     currentDialogId: state.dialogState.currentDialogId,
     myId: state.userState.user._id,
-    globalUsers: state.userState.searchedUsers
+    globalUsers: state.userState.searchedUsers,
   };
 };
 
 const mapDispatchToProps = {
   getDialogs: dialogActions.fetchDialogs,
   setCurrentDialog: dialogActions.setCurrentDialog,
-  findUsers: userActions.findUsers
+  findUsers: userActions.findUsers,
+  clearGlobalSearch: userActions.searchUserClear,
+  setSelectedUser: dialogActions.setSelectedUser,
+  clearMessages: messageActions.clearMessages
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dialogs);

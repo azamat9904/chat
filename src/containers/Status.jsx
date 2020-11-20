@@ -2,8 +2,7 @@ import React from 'react';
 import { Status as StatusBase } from '../components';
 import { connect } from 'react-redux';
 
-const Status = ({ currentDialogId, myId, dialogs }) => {
-    const currentDialog = dialogs.find((dialog) => dialog._id === currentDialogId);
+const Status = ({ currentDialog, selectedUser }) => {
     let isOnline = null;
     let fullname = null;
 
@@ -12,14 +11,18 @@ const Status = ({ currentDialogId, myId, dialogs }) => {
         fullname = currentDialog.buddy.fullname;
     }
 
+    if (selectedUser) {
+        isOnline = selectedUser.isOnline;
+        fullname = selectedUser.fullname;
+    }
+
     return <StatusBase online={isOnline} fullname={fullname} />
 }
 
 const mapStateToProps = (state) => {
     return {
-        currentDialogId: state.dialogState.currentDialogId,
-        dialogs: state.dialogState.messages,
-        myId: state.userState.user.id
+        currentDialog: state.dialogState.currentDialog,
+        selectedUser: state.dialogState.selectedUser
     }
 }
 

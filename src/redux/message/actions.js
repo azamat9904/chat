@@ -4,7 +4,8 @@ export const actionTypes = {
   SET_MESSAGES: "SET_MESSAGES",
   FETCH_MESSAGES: "FETCH_MESSAGE",
   SET_LOADING: "SET_LOADING",
-  ADD_MESSAGE: "ADD_MESSAGE"
+  ADD_MESSAGE: "ADD_MESSAGE",
+  CLEAR_MESSAGES: "CLEAR_MESSAGES"
 }
 
 const actions = {
@@ -19,6 +20,9 @@ const actions = {
   addMessage: (message) => ({
     type: actionTypes.ADD_MESSAGE,
     payload: message
+  }),
+  clearMessages: () => ({
+    type: actionTypes.CLEAR_MESSAGES
   }),
   increaseMessage: (message) => (dispatch, getState) => {
     const { dialogState } = getState();
@@ -42,8 +46,8 @@ const actions = {
   },
   createMessage: (text) => (dispatch, getState) => {
     const { dialogState } = getState();
-    const { currentDialogId } = dialogState;
-    messageApi.createMessage(text, currentDialogId).then((d) => {
+    const { currentDialog } = dialogState;
+    messageApi.createMessage(text, currentDialog._id).then((d) => {
       console.log(d);
     }).catch((e) => {
       console.log(e);

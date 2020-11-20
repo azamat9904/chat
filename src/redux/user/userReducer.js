@@ -14,7 +14,8 @@ const initialState = {
     verifyUserError: null,
     verifyUserClear: false,
     searchedUsers: [],
-    searchedUsersError: null
+    searchedUsersError: null,
+    selectedUser: null
 };
 
 const userReducer = (
@@ -95,7 +96,7 @@ const userReducer = (
                 ...state,
                 searchedUsersError: null,
                 searchedUsers: []
-            }
+            };
         default:
             return state;
     }

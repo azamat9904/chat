@@ -9,25 +9,28 @@ import socketActions, { socketActionTypes } from '../core/socket';
 const Messages = ({
   messages,
   fetchMessages,
-  dialogId,
+  currentdialog,
   isLoading,
   increaseMessage,
   myId
 }) => {
 
+
   const blockRef = useRef(null);
 
   useEffect(() => {
-    if (dialogId)
-      fetchMessages(dialogId);
+    if (currentdialog && currentdialog._id)
+      fetchMessages(currentdialog._id);
+
     const createMessageHandler = (message) => {
       increaseMessage(message);
     }
+
     socketActions.messageCreatedListener(createMessageHandler);
     return () => {
       socketActions.removeListener(socketActionTypes.NEW_MESSAGE, createMessageHandler);
     }
-  }, [dialogId, fetchMessages]);
+  }, [currentdialog, fetchMessages]);
 
 
   useEffect(() => {
@@ -54,7 +57,7 @@ const Messages = ({
 const mapStateToProps = (state) => {
   return {
     messages: state.messageState.messages,
-    dialogId: state.dialogState.currentDialogId,
+    currentdialog: state.dialogState.currentDialog,
     isLoading: state.messageState.isLoading,
     myId: state.userState.user._id
   };

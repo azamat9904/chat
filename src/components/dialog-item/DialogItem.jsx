@@ -24,7 +24,7 @@ const DialogItem = ({
   messageText,
   messageIsReaded,
   messageUnreaded,
-  messageId,
+  id,
   isMe
 }) => {
   const classes = classNames("dialogs__item", {
@@ -33,7 +33,7 @@ const DialogItem = ({
   });
 
   return (
-    <div className={classes} onClick={() => onSelect(messageId)}>
+    <div className={classes} onClick={() => onSelect(id)}>
       <div className="dialogs__item-avatar">
         <Avatar user={user} />
       </div>

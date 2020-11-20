@@ -2,7 +2,6 @@ import { actionTypes } from "./actions";
 
 const initalState = {
   messages: [],
-  currentDialogId: null,
   isLoading: false,
 };
 
@@ -28,6 +27,11 @@ const messageReducer = (
           ...state.messages,
           action.payload
         ]
+      };
+    case actionTypes.CLEAR_MESSAGES:
+      return {
+        ...state,
+        messages: []
       }
     default:
       return state;
