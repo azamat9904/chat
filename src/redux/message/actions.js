@@ -26,9 +26,9 @@ const actions = {
   }),
   increaseMessage: (message) => (dispatch, getState) => {
     const { dialogState } = getState();
-    const { currentDialogId } = dialogState;
+    const { currentDialog } = dialogState;
 
-    if (currentDialogId === message.dialog._id) {
+    if (currentDialog._id === message.dialog._id) {
       dispatch(actions.addMessage(message));
     }
   },
