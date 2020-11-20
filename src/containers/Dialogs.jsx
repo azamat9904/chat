@@ -13,7 +13,7 @@ const Dialogs = ({
   dialogs,
   getDialogs,
   setCurrentDialog,
-  currentDialogId,
+  currentDialog,
   myId,
   findUsers,
   globalUsers,
@@ -115,6 +115,7 @@ const Dialogs = ({
     setTimerId(timer);
   };
 
+
   return (
     <BaseDialogs
       dialogs={filtered}
@@ -123,7 +124,7 @@ const Dialogs = ({
       inputValue={inputValue}
       onDialogSelect={onDialogSelect}
       onUserSelect={onUserSelect}
-      currentDialogId={currentDialogId}
+      currentDialogId={currentDialog ? currentDialog._id : ""}
       myId={myId}
     />
   );
@@ -132,7 +133,7 @@ const Dialogs = ({
 const mapStateToProps = (state) => {
   return {
     dialogs: state.dialogState.messages,
-    currentDialogId: state.dialogState.currentDialogId,
+    currentDialog: state.dialogState.currentDialog,
     myId: state.userState.user._id,
     globalUsers: state.userState.searchedUsers,
   };
