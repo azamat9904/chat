@@ -74,6 +74,7 @@ const Dialogs = ({
   const onDialogSelect = (dialogId) => {
     setInputValue("");
     setFiltered(dialogs);
+    setOtherUsers([]);
     props.history.push('/dialogs?id=' + dialogId);
   }
 
@@ -84,27 +85,32 @@ const Dialogs = ({
     clearMessages();
     setInputValue("");
     setFiltered(dialogs);
+    setOtherUsers([]);
   }
 
   const onChangeInput = (value) => {
+    if (!value) {
+      clearGlobalSearch();
+      setFiltered(dialogs);
+      setInputValue("");
+      clearTimeout(timerId);
+      return;
+    }
+
+    const f = dialogs.filter(
+      (dialog) =>
+        dialog.buddy.fullname.toLowerCase().indexOf(value.toLowerCase()) >= 0
+        || dialog.buddy.email.toLowerCase().indexOf(value.toLowerCase()) >= 0
+    );
+
+    setFiltered(f);
+    setInputValue(value);
+
     clearTimeout(timerId);
 
     const timer = setTimeout(() => {
-      if (!value) {
-        clearGlobalSearch();
-        setFiltered(dialogs);
-        setInputValue("");
-        return;
-      }
-      const f = dialogs.filter(
-        (dialog) =>
-          dialog.buddy.fullname.toLowerCase().indexOf(value.toLowerCase()) >= 0
-          || dialog.buddy.email.toLowerCase().indexOf(value.toLowerCase()) >= 0
-      );
       findUsers(value);
-      setFiltered(f);
-      setInputValue(value);
-    }, 100);
+    }, 250);
 
     setTimerId(timer);
   };

@@ -21,7 +21,7 @@ const LoginContainer = (props) => {
     if (loginSuccess) {
       openNotification('Успех', 'Вы успешно авторизовались', 'success');
       fetchUserClear();
-      history.push('/');
+      history.push('/dialogs');
     }
 
     if (loginFailed) {
