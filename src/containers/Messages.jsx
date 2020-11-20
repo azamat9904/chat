@@ -15,7 +15,6 @@ const Messages = ({
   myId
 }) => {
 
-
   const blockRef = useRef(null);
 
   useEffect(() => {

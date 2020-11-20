@@ -60,12 +60,16 @@ const Dialogs = ({
   const onDialogSelect = (dialogId) => {
     const selectedDialog = dialogs.find((dialog) => dialog._id === dialogId);
     setCurrentDialog(selectedDialog);
+    setInputValue("");
+    setFiltered(dialogs);
   }
 
   const onUserSelect = (userId) => {
     const selectedUser = globalUsers.find((user) => user._id === userId);
     setSelectedUser(selectedUser);
     clearMessages();
+    setInputValue("");
+    setFiltered(dialogs);
   }
 
   const onChangeInput = (value) => {
