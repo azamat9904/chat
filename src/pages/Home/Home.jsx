@@ -4,7 +4,8 @@ import * as Icon from "@ant-design/icons";
 import { Dialogs, Messages, ChatInput, Status } from "../../containers";
 import "./Home.scss";
 
-const Home = () => {
+const Home = (props) => {
+
   return (
     <section className="home">
       <div className="chat">

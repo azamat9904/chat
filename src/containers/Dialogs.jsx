@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { withRouter } from 'react-router-dom';
 
 import { Dialogs as BaseDialogs } from "../components/index";
 import dialogActions from "../redux/dialog/actions";
@@ -18,12 +19,15 @@ const Dialogs = ({
   globalUsers,
   clearGlobalSearch,
   setSelectedUser,
-  clearMessages
+  clearMessages,
+  ...props
 }) => {
+
   const [inputValue, setInputValue] = useState("");
   const [filtered, setFiltered] = useState([]);
   const [otherUsers, setOtherUsers] = useState([]);
   const [timerId, setTimerId] = useState('');
+  const [queryParamKey, queryParamValue] = props.location.search.substr(1).split('=');
 
   useEffect(() => {
     getDialogs();
@@ -33,6 +37,17 @@ const Dialogs = ({
     }
   }, [getDialogs]);
 
+  
+  useEffect(() => {
+    if (queryParamKey == 'id' && queryParamValue) {
+      const selectedDialog = dialogs.find((dialog) => dialog._id === queryParamValue);
+      if (selectedDialog) {
+        setCurrentDialog(selectedDialog);
+        return;
+      }
+      props.history.push('/dialogs');
+    }
+  }, [dialogs, queryParamKey, queryParamValue])
 
   useEffect(() => {
     const users = [];
@@ -58,10 +73,9 @@ const Dialogs = ({
 
 
   const onDialogSelect = (dialogId) => {
-    const selectedDialog = dialogs.find((dialog) => dialog._id === dialogId);
-    setCurrentDialog(selectedDialog);
     setInputValue("");
     setFiltered(dialogs);
+    props.history.push('/dialogs?id=' + dialogId);
   }
 
   const onUserSelect = (userId) => {
@@ -127,4 +141,4 @@ const mapDispatchToProps = {
   clearMessages: messageActions.clearMessages
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dialogs);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Dialogs));

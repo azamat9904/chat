@@ -17,7 +17,7 @@ const Dialogs = ({
 }) => {
 
   const myFriendsList = dialogs.length !== 0 ?
-    orderBy(dialogs, ["created_at", "desc"]).map((dialog, index) => (
+    orderBy(dialogs, ["created_at", "asc"]).map((dialog, index) => (
       <DialogItem
         key={index}
         user={dialog.buddy}

@@ -17,7 +17,7 @@ const App = ({ isAuth, initApp }) => {
         <Switch>
           <Route exact path={["/login", "/register", '/email/check']} component={Auth} />
           {
-            isAuth && <Route exact path="/" component={Home} />
+            isAuth && <Route exact path="/dialogs" component={Home} />
           }
         </Switch>
       </div>
