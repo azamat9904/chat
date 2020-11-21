@@ -16,10 +16,8 @@ const Dialogs = ({
   myId
 }) => {
 
-  console.log(currentDialogId);
-
   const myFriendsList = dialogs.length !== 0 ?
-    orderBy(dialogs, ["created_at", "asc"]).map((dialog, index) => (
+    orderBy(dialogs, ["lastMessage.createdAt"], ["desc"]).map((dialog, index) => (
       <DialogItem
         key={index}
         user={dialog.buddy}
@@ -36,7 +34,7 @@ const Dialogs = ({
 
 
   const otherUserLists = globalUsers.length !== 0 ?
-    orderBy(globalUsers).map((user, index) => (
+    globalUsers.map((user, index) => (
       <DialogItem
         key={index}
         user={user}

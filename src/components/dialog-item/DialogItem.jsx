@@ -10,11 +10,10 @@ const getMessageTime = (created_at) => {
   const date = new Date(created_at);
 
   if (isToday(date)) {
-    return format(date, "k:m");
+    return format(date, "hh:mm");
   }
   return format(date, "dd.MM.yy");
 };
-
 
 const DialogItem = ({
   user,
