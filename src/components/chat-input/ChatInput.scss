@@ -13,11 +13,22 @@
     border-radius: 30px;
   }
 
+  &__smile-container{
+    position: relative;
+  }
+
   &__smile-btn {
     position: absolute;
     z-index: 1;
   }
 
+  &__smile-list{
+    position: absolute;
+    bottom:45px;
+    left:0;
+    z-index: 1000;
+  }
+  
   &__actions {
     flex: 0 0 40px;
     display: flex;

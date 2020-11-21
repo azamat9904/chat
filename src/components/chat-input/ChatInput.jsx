@@ -1,14 +1,29 @@
 import React from "react";
 import * as Icon from "@ant-design/icons";
+import { Picker } from 'emoji-mart'
 import { Input, Button } from "antd";
 
 import "./ChatInput.scss";
 
-const ChatInput = ({ value, setValue, enterPressedHandler }) => {
+const ChatInput = ({
+  value,
+  setValue,
+  enterPressedHandler,
+  showSmiles,
+  setShowSmiles,
+  addEmoji
+}) => {
   return (
     <div className="chat-input">
-      <div className="chat-input__smile-btn">
-        <Icon.SmileOutlined />
+      <div className="chat-input__smile-container">
+        <div className="chat-input__smile-btn" onClick={() => setShowSmiles(!showSmiles)}>
+          <Icon.SmileOutlined />
+        </div>
+        {
+          showSmiles ? <div className="chat-input__smile-list">
+            <Picker set='apple' onSelect={addEmoji} />
+          </div> : null
+        }
       </div>
       <Input
         onChange={(e) => setValue(e.target.value)}
