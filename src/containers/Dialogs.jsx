@@ -46,6 +46,7 @@ const Dialogs = ({
         return;
       }
     }
+
   }, [dialogs, queryParamKey, queryParamValue])
 
   useEffect(() => {

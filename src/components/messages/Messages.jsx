@@ -17,7 +17,12 @@ export const Messages = ({ items, isLoading, myId }) => {
       ) : (
           <>
             {items.length !== 0 ? (
-              items.map((item, index) => <Message message={item} key={index} isMe={item.user.id === myId} />)
+              items.map((item, index) =>
+                <Message
+                  message={item}
+                  key={index}
+                  isMe={item.user._id === myId}
+                />)
             ) : (
                 <div className="dialog-empty">
                   <Empty description="Откройте диалог" />

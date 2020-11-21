@@ -11,7 +11,7 @@ const Status = ({ online, fullname }) => {
       case true:
         return 'Онлайн';
       case false:
-        return 'Оффлайн';
+        return 'Офлайн';
       default:
         return '';
     }

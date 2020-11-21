@@ -28,7 +28,7 @@ const ChatInput = ({
     }, [createDialogSuccess])
 
     const enterPressedHandler = (e) => {
-        if (e.keyCode === 13) {
+        if (e.keyCode === 13 && value.trim()) {
             if (currentDialog)
                 createMessage(value);
 

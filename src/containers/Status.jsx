@@ -16,7 +16,10 @@ const Status = ({ currentDialog, selectedUser }) => {
         fullname = selectedUser.fullname;
     }
 
-    return <StatusBase online={isOnline} fullname={fullname} />
+    return <StatusBase
+        online={isOnline}
+        fullname={fullname}
+    />
 }
 
 const mapStateToProps = (state) => {

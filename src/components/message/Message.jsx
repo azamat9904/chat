@@ -18,7 +18,7 @@ const Message = ({ message, isMe }) => {
         <Avatar user={message.user} />
       </div>
       <div className="message__content">
-        <MessageStatus isMe={message.user.isMe} isReaded={message.isReaded} />
+        <MessageStatus isMe={isMe} isReaded={message.read} />
         <div className="message__info">
           {(message.text || message.isTyping || message.audio) && (
             <div className="message__bubble">
