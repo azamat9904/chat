@@ -23,6 +23,15 @@ const actions = {
     type: actionTypes.SET_SELECTED_USER,
     payload: user
   }),
+  updateDialog: (message, currentDialog) => (dispatch, getState) => {
+    const { dialogState } = getState();
+    const dialogs = [...dialogState.messages];
+    const index = dialogs.indexOf(currentDialog);
+    if (index !== -1)
+      dialogs[index].lastMessage = message;
+
+    dispatch(actions.setDialogs(dialogs));
+  },
   fetchDialogs: () => (dispatch, getState) => {
     dialogApi.getAll().then((dialogs) => {
       const { userState } = getState();

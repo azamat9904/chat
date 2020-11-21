@@ -2,7 +2,9 @@ import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 
 import { Messages as BaseMessages } from "../components/messages/Messages";
-import actions from "../redux/message/actions";
+import messageActions from "../redux/message/actions";
+import dialogActions from '../redux/dialog/actions';
+
 import socketActions, { socketActionTypes } from '../core/socket';
 
 
@@ -12,7 +14,8 @@ const Messages = ({
   currentdialog,
   isLoading,
   increaseMessage,
-  myId
+  myId,
+  updateDialog
 }) => {
 
   const blockRef = useRef(null);
@@ -22,6 +25,7 @@ const Messages = ({
       fetchMessages(currentdialog._id);
 
     const createMessageHandler = (message) => {
+      updateDialog(message, currentdialog);
       increaseMessage(message);
     }
 
@@ -58,13 +62,15 @@ const mapStateToProps = (state) => {
     messages: state.messageState.messages,
     currentdialog: state.dialogState.currentDialog,
     isLoading: state.messageState.isLoading,
-    myId: state.userState.user._id
+    myId: state.userState.user._id,
+    dialogs: state.dialogState.messages
   };
 };
 
 const mapDispatchToProps = {
-  fetchMessages: actions.fetchMessages,
-  increaseMessage: actions.increaseMessage
+  fetchMessages: messageActions.fetchMessages,
+  increaseMessage: messageActions.increaseMessage,
+  updateDialog: dialogActions.updateDialog
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Messages);
