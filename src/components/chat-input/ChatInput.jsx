@@ -15,8 +15,8 @@ const ChatInput = ({
 }) => {
   return (
     <div className="chat-input">
-      <div className="chat-input__smile-container">
-        <div className="chat-input__smile-btn" onClick={() => setShowSmiles(!showSmiles)}>
+      <div className="chat-input__smile-container" onMouseEnter={() => setShowSmiles(true)} onMouseLeave={() => setShowSmiles(false)}>
+        <div className="chat-input__smile-btn">
           <Icon.SmileOutlined />
         </div>
         {

@@ -24,11 +24,12 @@
 
   &__smile-list{
     position: absolute;
-    bottom:45px;
+    bottom:25px;
+    padding-bottom: 20px;
     left:0;
     z-index: 1000;
   }
-  
+
   &__actions {
     flex: 0 0 40px;
     display: flex;
