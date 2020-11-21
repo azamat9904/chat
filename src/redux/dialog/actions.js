@@ -23,13 +23,15 @@ const actions = {
     type: actionTypes.SET_SELECTED_USER,
     payload: user
   }),
-  updateDialog: (message, currentDialog) => (dispatch, getState) => {
+  updateDialog: (message) => (dispatch, getState) => {
+    const dialogId = message.dialog._id
     const { dialogState } = getState();
     const dialogs = [...dialogState.messages];
-    const index = dialogs.indexOf(currentDialog);
-    if (index !== -1)
-      dialogs[index].lastMessage = message;
-
+    const updatedDialog = dialogs.find((dialog) => dialog._id === dialogId);
+    const updatedDialogIndex = dialogs.indexOf(updatedDialog);
+    if (updatedDialogIndex !== -1) {
+      dialogs[updatedDialogIndex].lastMessage = message;
+    }
     dispatch(actions.setDialogs(dialogs));
   },
   fetchDialogs: () => (dispatch, getState) => {

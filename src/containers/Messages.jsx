@@ -25,7 +25,7 @@ const Messages = ({
       fetchMessages(currentdialog._id);
 
     const createMessageHandler = (message) => {
-      updateDialog(message, currentdialog);
+      updateDialog(message);
       increaseMessage(message);
     }
 
